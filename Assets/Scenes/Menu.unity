@@ -3085,7 +3085,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Mejora ligeramente la velocidad de disparo y el da\xF1o. Precio: ???"
+  m_Text: "Mejora ligeramente la velocidad de disparo y el da\xF1o. Precio: 1500"
 --- !u!222 &571621597
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3244,7 +3244,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Es exactamente igual a su predecesor, pero lanza dos flechas en lugar
-    de una. Precio: ???'
+    de una. Precio: 1000'
 --- !u!222 &608746540
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5635,7 +5635,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Vuelve a mejorar ligeramente la velocidad de disparo y el da\xF1o, \xBFqu\xE9
-    esperabas, que bajaran?. Precio: ???"
+    esperabas, que bajaran?. Precio: 2000"
 --- !u!222 &881991538
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6233,7 +6233,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Cada tipo de flecha hace m\xE1s da\xF1o a un tipo concreto de enemigo
     y le empuja hacia atr\xE1s. Para comprar las flechas realiza un \xFAnico pago
-    de ???"
+    de 200"
 --- !u!222 &993172702
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6444,7 +6444,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Mejora ampliamente el da\xF1o y lanza 3 flechas, \xBFqu\xE9 m\xE1s se
-    le podr\xEDa pedir? Precio: ???"
+    le podr\xEDa pedir? Precio: 3000"
 --- !u!222 &1051713890
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6681,7 +6681,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Mejora un poco la velocidad de disparo y el da\xF1o. Precio: ???"
+  m_Text: "Mejora un poco la velocidad de disparo y el da\xF1o. Precio: 500"
 --- !u!222 &1078571896
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7302,10 +7302,10 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Bienvenido a la tienda de flechas especiales. Aqui podr\xE1s encontrar
-    tres tipos de flecha: flechas bomba, flechas de muerte instantanea y flechas
-    de angel. (insertar precio). Las dos primeras son limitadas y tendras que comprarlas
-    con cada uso, 10 y 5 respectivamente. En el caso de las flechas de \xE1ngel solo
-    tendras que realizar una compra"
+    tres tipos de flecha: flechas bomba, 100 monedas, flechas de muerte instantanea,
+    100 monedas, y flechas de angel, 1000 monedas. Las dos primeras son limitadas
+    y tendras que comprarlas con cada uso, 10 y 5 respectivamente. En el caso de
+    las flechas de \xE1ngel solo tendras que realizar una compra"
 --- !u!222 &1208277304
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -17,6 +17,8 @@ public class playerLifeScript : MonoBehaviour
     private float health;
     //The canvas
     private GameObject canvas;
+    //The bow
+    private GameObject bow;
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class playerLifeScript : MonoBehaviour
         canvas = GameObject.Find("Canvas");
         healthBar = GameObject.Find("playerHealth");
         endMenu = GameObject.Find("EndMenu");
+        bow = GameObject.Find("bow");
         endelessController = GameObject.Find("EndlessController");
         endMenu.SetActive(false);
         //We set the max health and the health
@@ -45,6 +48,7 @@ public class playerLifeScript : MonoBehaviour
                 //We save all the coins, score and number of bombs and instant kill arrows.
                 if (health <= 0.0f)
                 {
+                    bow.GetComponent<bowScript>().dead = true;
                     Time.timeScale = 0f;
                     endMenu.SetActive(true);
                     PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + (int)endelessController.GetComponent<endlessControllerScript>().coinsGained);

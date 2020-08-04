@@ -339,125 +339,136 @@ public class mainMenuScript : MonoBehaviour
     //Functions to unlock the arrows
     public void UnlockArrow2()
     {
-        if (PlayerPrefs.GetInt("Coins") >= 0)
+        if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow2") == 0)
             {
                 PlayerPrefs.SetInt("Arrow2", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 200);
                 arrow2Bought.SetActive(true);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             }
         }
     }
     public void UnlockArrow4()
     {
-        if (PlayerPrefs.GetInt("Coins") >= 0)
+        if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow4") == 0)
             {
                 PlayerPrefs.SetInt("Arrow4", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 200);
                 arrow4Bought.SetActive(true);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             }
         }
     }
     public void UnlockArrow5()
     {
-        if (PlayerPrefs.GetInt("Coins") >= 0)
+        if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow5") == 0)
             {
                 PlayerPrefs.SetInt("Arrow5", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 200);
                 arrow5Bought.SetActive(true);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             }
         }
     }
     public void UnlockArrow7()
     {
-        if (PlayerPrefs.GetInt("Coins") >= 0)
+        if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow7") == 0)
             {
                 PlayerPrefs.SetInt("Arrow7", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 200);
                 arrow7Bought.SetActive(true);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             }
         }
     }
     public void UnlockArrow8()
     {
-        if (PlayerPrefs.GetInt("Coins") >= 0)
+        if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow8") == 0)
             {
                 PlayerPrefs.SetInt("Arrow8", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 200);
                 arrow8Bought.SetActive(true);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             }
         }
     }
     public void UnlockArrow9()
     {
-        if (PlayerPrefs.GetInt("Coins") >= 0)
+        if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow9") == 0)
             {
                 PlayerPrefs.SetInt("Arrow9", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 200);
                 arrow9Bought.SetActive(true);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             }
         }
     }
     public void UnlockArrow10()
     {
-        if (PlayerPrefs.GetInt("Coins") >= 0)
+        if (PlayerPrefs.GetInt("Coins") >= 1000)
         {
             if (PlayerPrefs.GetInt("Arrow10") == 0)
             {
                 PlayerPrefs.SetInt("Arrow10", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 1000);
                 arrow10Bought.SetActive(true);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             }
         }
     }
 
     //Function to upgrade the damage
     public void UpgradeDamage(){
-        if (PlayerPrefs.GetInt("Coins") >= 0)
+        if (PlayerPrefs.GetInt("Coins") >= 5000)
         {
             PlayerPrefs.SetFloat("UpgradeMultiplier", PlayerPrefs.GetFloat("UpgradeMultiplier") + 0.1f);
             actualDamage.GetComponent<Text>().text = PlayerPrefs.GetFloat("UpgradeMultiplier").ToString();
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 5000);
+            coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             Debug.Log(PlayerPrefs.GetFloat("UpgradeMultiplier"));
         }
     }
     //Function to buy instant kill arrows
     public void IncrementInstantKill()
     {
-        if (PlayerPrefs.GetInt("Coins") >= 0)
+        if (PlayerPrefs.GetInt("Coins") >= 100)
         {
             if (PlayerPrefs.GetInt("InstantKills") < 5)
             {
                 PlayerPrefs.SetInt("InstantKills", PlayerPrefs.GetInt("InstantKills") + 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 100);
                 instantkillNumb.GetComponent<Text>().text = PlayerPrefs.GetInt("InstantKills").ToString();
                 if (PlayerPrefs.GetInt("InstantKills") == 5) instantkillNumb.GetComponent<Text>().color = Color.green;
                 else instantkillNumb.GetComponent<Text>().color = Color.black;
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             }
         }
     }
     //Function to buy bombs
     public void IncrementBomb()
     {
-        if (PlayerPrefs.GetInt("Coins") >= 0)
+        if (PlayerPrefs.GetInt("Coins") >= 100)
         {
             if (PlayerPrefs.GetInt("Bombs") < 10)
             {
                 PlayerPrefs.SetInt("Bombs", PlayerPrefs.GetInt("Bombs") + 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 100);
                 bombNumb.GetComponent<Text>().text = PlayerPrefs.GetInt("Bombs").ToString();
                 if (PlayerPrefs.GetInt("Bombs") == 10) bombNumb.GetComponent<Text>().color = Color.green;
                 else bombNumb.GetComponent<Text>().color = Color.black;
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             }
         }
     }
@@ -476,12 +487,13 @@ public class mainMenuScript : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Bow2") == 0)           
         {
-            if (PlayerPrefs.GetInt("Coins") >= 0)
+            if (PlayerPrefs.GetInt("Coins") >= 500)
             {
                 PlayerPrefs.SetInt("Bow2", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 500);
                 bow2Bought.SetActive(true);
                 PlayerPrefs.SetInt("UsingBow", 2);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
 
                 bow1Bought.GetComponent<Image>().color = Color.white;
                 bow2Bought.GetComponent<Image>().color = Color.yellow;
@@ -507,12 +519,13 @@ public class mainMenuScript : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Bow3") == 0)
         {
-            if (PlayerPrefs.GetInt("Coins") >= 0)
+            if (PlayerPrefs.GetInt("Coins") >= 1000)
             {
                 PlayerPrefs.SetInt("Bow3", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 1000);
                 bow3Bought.SetActive(true);
                 PlayerPrefs.SetInt("UsingBow", 3);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
                 bow1Bought.GetComponent<Image>().color = Color.white;
                 bow2Bought.GetComponent<Image>().color = Color.white;
                 bow3Bought.GetComponent<Image>().color = Color.yellow;
@@ -537,12 +550,13 @@ public class mainMenuScript : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Bow4") == 0)
         {
-            if (PlayerPrefs.GetInt("Coins") >= 0)
+            if (PlayerPrefs.GetInt("Coins") >= 1500)
             {
                 PlayerPrefs.SetInt("Bow4", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 1500);
                 bow4Bought.SetActive(true);
                 PlayerPrefs.SetInt("UsingBow", 4);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
                 bow1Bought.GetComponent<Image>().color = Color.white;
                 bow2Bought.GetComponent<Image>().color = Color.white;
                 bow3Bought.GetComponent<Image>().color = Color.white;
@@ -567,12 +581,13 @@ public class mainMenuScript : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Bow5") == 0)
         {
-            if (PlayerPrefs.GetInt("Coins") >= 0)
+            if (PlayerPrefs.GetInt("Coins") >= 2000)
             {
                 PlayerPrefs.SetInt("Bow5", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 2000);
                 bow5Bought.SetActive(true);
                 PlayerPrefs.SetInt("UsingBow", 5);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
                 bow1Bought.GetComponent<Image>().color = Color.white;
                 bow2Bought.GetComponent<Image>().color = Color.white;
                 bow3Bought.GetComponent<Image>().color = Color.white;
@@ -597,12 +612,13 @@ public class mainMenuScript : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Bow6") == 0)
         {
-            if (PlayerPrefs.GetInt("Coins") >= 0)
+            if (PlayerPrefs.GetInt("Coins") >= 3000)
             {
                 PlayerPrefs.SetInt("Bow6", 1);
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 0);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 3000);
                 bow6Bought.SetActive(true);
                 PlayerPrefs.SetInt("UsingBow", 6);
+                coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
                 bow1Bought.GetComponent<Image>().color = Color.white;
                 bow2Bought.GetComponent<Image>().color = Color.white;
                 bow3Bought.GetComponent<Image>().color = Color.white;

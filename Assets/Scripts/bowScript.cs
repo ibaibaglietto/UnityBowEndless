@@ -44,6 +44,8 @@ public class bowScript : MonoBehaviour
     float h = Screen.height;
     //A bool to see if the game is paused
     public bool paused;
+    //A bool to see if the player is dead
+    public bool dead;
     //The explosion
     public GameObject explosion;
     //The sprites of the bows
@@ -106,15 +108,16 @@ public class bowScript : MonoBehaviour
             firingRate = 0.15f;
             damageMultipier = 1.7f + PlayerPrefs.GetFloat("UpgradeMultiplier");
         }
+        //We initialize the dead bool
+        dead = false;
         Debug.Log(damageMultipier);
     }
 
 
-
-    // Update is called once per frame
+        
     void Update()
     {
-        if (!paused)
+        if (!paused && !dead)
         {
             if (carcajOpen) Time.timeScale = 0.1f;
             else Time.timeScale = 1.0f;
