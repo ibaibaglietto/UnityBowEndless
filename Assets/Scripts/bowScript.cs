@@ -59,9 +59,15 @@ public class bowScript : MonoBehaviour
     public int bowNumber;
     //The canvas
     private GameObject canvas;
+    //A bool to check if the game is fast forwarding
+    public bool fastForward;
+    //A bool to check if the player stopped clicking the fast forward button
+    public bool fastForwarding;
 
     private void Start()
     {
+        //We initialize the fast forward bools
+        fastForward = false;
         //We save the bow number we are using
         bowNumber = PlayerPrefs.GetInt("UsingBow");
         //Find the canvas
@@ -120,6 +126,7 @@ public class bowScript : MonoBehaviour
         if (!paused && !dead)
         {
             if (carcajOpen) Time.timeScale = 0.1f;
+            else if (fastForward) Time.timeScale = 2.0f;
             else Time.timeScale = 1.0f;
             //We can change the arrows with the numbers
             if (Input.GetKeyDown(KeyCode.Alpha1)) arrowType = 1;
@@ -140,7 +147,7 @@ public class bowScript : MonoBehaviour
             {
                 if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
                     fingerCount++;
-                if ((fingerCount > 0) && ((Time.fixedTime - lastArrow) >= firingRate) && !carcajOpen)
+                if ((fingerCount > 0) && ((Time.fixedTime - lastArrow) >= firingRate) && !carcajOpen && !fastForwarding)
                 {
                     //If the arrow isn't a bomb nor an instant kill arrow
                     if (arrowType != 3 && arrowType != 6)
@@ -297,7 +304,7 @@ public class bowScript : MonoBehaviour
                 }
             }
             //We can shoot arrows using the mouse too
-            if ((Input.GetMouseButtonDown(0)) && ((Time.fixedTime - lastArrow) >= firingRate) && !carcajOpen)
+            if ((Input.GetMouseButton(0)) && ((Time.fixedTime - lastArrow) >= firingRate) && !carcajOpen && !fastForwarding)
             {
                 if (arrowType != 3 && arrowType != 6)
                 {

@@ -30,6 +30,11 @@ public class UIScript : MonoBehaviour
     //The text and number of the arrows left
     private GameObject arrowsLeftText;
     private GameObject arrowsLeftNumb;
+    //The fast forward button
+    private GameObject fastForwardButton;
+    //The play and fast forward images
+    public Sprite playSprite;
+    public Sprite fastForwardSprite;
     //The number of bombs and instant kill arrows
     public int bombNumb;
     public int instantNumb;
@@ -41,6 +46,7 @@ public class UIScript : MonoBehaviour
         instantNumb = PlayerPrefs.GetInt("InstantKills");
         endMenu = GameObject.Find("EndMenu");
         pauseMenu = GameObject.Find("PauseMenu");
+        fastForwardButton = GameObject.Find("fastForwardButton");
         bow = GameObject.Find("bow");
         arrow1 = GameObject.Find("arrow1Button");
         arrow2 = GameObject.Find("arrow2Button");
@@ -188,7 +194,28 @@ public class UIScript : MonoBehaviour
             bow.GetComponent<bowScript>().carcajOpen = false;
         }        
     }
+
+    //Function to put time x2 or normal
+    public void FastForward()
+    {
+        if (bow.GetComponent<bowScript>().fastForward)
+        {
+            fastForwardButton.GetComponent<Image>().sprite = fastForwardSprite;
+            bow.GetComponent<bowScript>().fastForward = false;
+        }
+        else
+        {
+            fastForwardButton.GetComponent<Image>().sprite = playSprite;
+            bow.GetComponent<bowScript>().fastForward = true;
+        }
+        bow.GetComponent<bowScript>().fastForwarding = true;
+    }
     
+    public void StopFastForwarding()
+    {
+        bow.GetComponent<bowScript>().fastForwarding = false;
+    }    
+
     private void Update()
     {
         //We decrease the number of bomb arrows or instant kill arrows if we use them
