@@ -127,43 +127,43 @@ public class endlessControllerScript : MonoBehaviour
             else if ((Time.fixedTime - startTime) < 110.0f) r = Random.Range(4, 7);
             else r = Random.Range(1, 7);
             //The spawn position will be random in a range depending on the last spawn
-            if((lastRy < -4.0f) || (lastRy > 4.0f)) ry = Random.Range(-4.0f, 4.0f);
-            else if (lastRy < -3.0f) ry = Random.Range(-2.0f, 4.0f);
-            else if (lastRy > 3.0f) ry = Random.Range(-4.0f, 2.0f);
+            if((lastRy < -4.5f) || (lastRy > 3.5f)) ry = Random.Range(-4.5f, 3.5f);
+            else if (lastRy < -3.5f) ry = Random.Range(-2.5f, 3.5f);
+            else if (lastRy > 2.5f) ry = Random.Range(-4.5f, 1.5f);
             //if the last spawn was on the center we will choose randomly a side and then randomly again the exact position
             else
             {
                 rtopbot = Random.Range(1, 2);
-                if (((rtopbot == 1) && lastRy>-2.0f) || (lastRy>2.0f))
+                if (((rtopbot == 1) && lastRy>-2.5f) || (lastRy>1.5f))
                 {
-                    ry = Random.Range(-4.0f, lastRy - 2.0f);
+                    ry = Random.Range(-4.5f, lastRy - 2.5f);
                 }
-                else ry = Random.Range(lastRy + 2.0f, 4.0f);
+                else ry = Random.Range(lastRy + 1.5f, 3.5f);
             }
             //we will instantiate a monser depending on the r
             if (r == 1)
             {
-                monster = Instantiate(blueMonster, new Vector3(12.00f, ry, 0.0f), Quaternion.identity);
+                monster = Instantiate(blueMonster, new Vector3(12.00f, ry, ry), Quaternion.identity);
             }
             else if (r == 2)
             {
-                monster = Instantiate(flyingMonster, new Vector3(12.00f, ry, 0.0f), Quaternion.identity);
+                monster = Instantiate(flyingMonster, new Vector3(12.00f, ry, ry), Quaternion.identity);
             }
             else if (r == 3)
             {
-                monster = Instantiate(melonMonster, new Vector3(12.00f, ry, 0.0f), Quaternion.identity);
+                monster = Instantiate(melonMonster, new Vector3(12.00f, ry, ry), Quaternion.identity);
             }
             else if (r == 4)
             {
-                monster = Instantiate(plantMonster, new Vector3(12.00f, ry, 0.0f), Quaternion.identity);
+                monster = Instantiate(plantMonster, new Vector3(12.00f, ry, ry), Quaternion.identity);
             }
             else if (r == 5)
             {
-                monster = Instantiate(spikyMonster, new Vector3(12.00f, ry, 0.0f), Quaternion.identity);
+                monster = Instantiate(spikyMonster, new Vector3(12.00f, ry, ry), Quaternion.identity);
             }
             else if (r == 6)
             {
-                monster = Instantiate(wormMonster, new Vector3(12.00f, ry, 0.0f), Quaternion.identity);
+                monster = Instantiate(wormMonster, new Vector3(12.00f, ry, ry), Quaternion.identity);
             }
             //we save the monster type, the time it spawned and the position
             monster.GetComponent<mobScript>().type = r;

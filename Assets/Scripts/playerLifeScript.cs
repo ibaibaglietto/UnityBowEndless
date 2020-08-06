@@ -53,7 +53,7 @@ public class playerLifeScript : MonoBehaviour
                     endMenu.SetActive(true);
                     PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + (int)endelessController.GetComponent<endlessControllerScript>().coinsGained);
                     endMenu.transform.Find("EndScore").GetComponent<Text>().text = ((int)endelessController.GetComponent<endlessControllerScript>().coinsGained).ToString();
-                    endMenu.transform.Find("EndMultiplier").GetComponent<Text>().text = endelessController.GetComponent<endlessControllerScript>().lifeMultiplyer.ToString();
+                    endMenu.transform.Find("EndTotalCoins").GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
                     PlayerPrefs.SetInt("Bombs", canvas.GetComponent<UIScript>().bombNumb);
                     PlayerPrefs.SetInt("InstantKills", canvas.GetComponent<UIScript>().instantNumb);
                 }

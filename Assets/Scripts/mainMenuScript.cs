@@ -48,11 +48,32 @@ public class mainMenuScript : MonoBehaviour
     private GameObject bow6Bought;
     //The actual damage
     private GameObject actualDamage;
+    //The texts
+    private Text buyDamagePriceNumb;
 
- 
-    void Start()
+
+    void Awake()
     {
+        highScoreScript highScoreTableScript = new highScoreScript();
+
         //We initialize the playerprefs
+        if (!PlayerPrefs.HasKey("highscoreTable"))
+        {
+            string json = JsonUtility.ToJson("");
+            PlayerPrefs.SetString("highscoreTable", json);
+            highScoreTableScript.AddHighScoreEntry(1000, "GOD");
+            highScoreTableScript.AddHighScoreEntry(800, "IBA");
+            highScoreTableScript.AddHighScoreEntry(720, "ACL");
+            highScoreTableScript.AddHighScoreEntry(600, "AIT");
+            highScoreTableScript.AddHighScoreEntry(420, "JUL");
+            highScoreTableScript.AddHighScoreEntry(300, "IZA");
+            highScoreTableScript.AddHighScoreEntry(200, "XAB");
+            highScoreTableScript.AddHighScoreEntry(100, "AND");
+            highScoreTableScript.AddHighScoreEntry(50, "JOE");
+            highScoreTableScript.AddHighScoreEntry(20, "JOS");
+            PlayerPrefs.SetInt("lastScore", 20);
+            PlayerPrefs.Save();
+        }
         if (!PlayerPrefs.HasKey("Coins"))
         {
             PlayerPrefs.SetInt("Coins", 1);
@@ -150,6 +171,7 @@ public class mainMenuScript : MonoBehaviour
         actualDamage = GameObject.Find("ActualDamage");
         actualDamage.GetComponent<Text>().text = PlayerPrefs.GetFloat("UpgradeMultiplier").ToString();
         coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
+        buyDamagePriceNumb = GameObject.Find("BuyDamagePriceNumb").GetComponent<Text>();
         //We deactivate some gameobjects
         storeMenu.SetActive(false);
         configurationMenu.SetActive(false);
@@ -206,7 +228,9 @@ public class mainMenuScript : MonoBehaviour
         {
             bow6Bought.GetComponent<Image>().color = Color.yellow;
         }
+        buyDamagePriceNumb.text = (5000 + PlayerPrefs.GetFloat("UpgradeMultiplier") * 30000).ToString();
     }
+
 
     //Function to start a game
     public void StartGame()
@@ -431,12 +455,13 @@ public class mainMenuScript : MonoBehaviour
 
     //Function to upgrade the damage
     public void UpgradeDamage(){
-        if (PlayerPrefs.GetInt("Coins") >= 5000)
+        if (PlayerPrefs.GetInt("Coins") >= 5000 + PlayerPrefs.GetFloat("UpgradeMultiplier") * 30000)
         {
             PlayerPrefs.SetFloat("UpgradeMultiplier", PlayerPrefs.GetFloat("UpgradeMultiplier") + 0.1f);
             actualDamage.GetComponent<Text>().text = PlayerPrefs.GetFloat("UpgradeMultiplier").ToString();
-            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 5000);
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - (int)(5000 + PlayerPrefs.GetFloat("UpgradeMultiplier") * 30000));
             coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
+            buyDamagePriceNumb.text = (5000 + PlayerPrefs.GetFloat("UpgradeMultiplier") * 30000).ToString();
             Debug.Log(PlayerPrefs.GetFloat("UpgradeMultiplier"));
         }
     }
