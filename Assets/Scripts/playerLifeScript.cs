@@ -19,6 +19,10 @@ public class playerLifeScript : MonoBehaviour
     private GameObject canvas;
     //The bow
     private GameObject bow;
+    //The top10 window
+    public GameObject top10;
+    //The score
+    private GameObject score;
 
     private void Start()
     {
@@ -28,10 +32,14 @@ public class playerLifeScript : MonoBehaviour
         endMenu = GameObject.Find("EndMenu");
         bow = GameObject.Find("bow");
         endelessController = GameObject.Find("EndlessController");
+        top10 = GameObject.Find("Top10Menu");
         endMenu.SetActive(false);
+        score = GameObject.Find("Score");
         //We set the max health and the health
         maxHealth = 10.0f;
         health = maxHealth;
+        //We deactivate the top10 menu
+        top10.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,7 +64,8 @@ public class playerLifeScript : MonoBehaviour
                     endMenu.transform.Find("EndTotalCoins").GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
                     PlayerPrefs.SetInt("Bombs", canvas.GetComponent<UIScript>().bombNumb);
                     PlayerPrefs.SetInt("InstantKills", canvas.GetComponent<UIScript>().instantNumb);
-                }
+                    if (PlayerPrefs.GetInt("lastScore") < int.Parse(score.GetComponent<Text>().text)) top10.SetActive(true);
+                }                
             }
         }
 

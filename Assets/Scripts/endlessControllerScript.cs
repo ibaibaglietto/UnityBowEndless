@@ -25,7 +25,7 @@ public class endlessControllerScript : MonoBehaviour
     //The monster
     private GameObject monster;
     //The start time
-    private float startTime;
+    public float startTime;
     //The time between monster spawns
     private float monsterTime;
     //The life multiplier

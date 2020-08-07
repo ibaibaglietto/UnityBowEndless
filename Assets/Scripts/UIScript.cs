@@ -14,6 +14,8 @@ public class UIScript : MonoBehaviour
     private GameObject endMenu;
     //The bow
     private GameObject bow;
+    //The endless controller
+    private GameObject endelessController;
     //The arrows
     private GameObject arrow1;
     private GameObject arrow2;
@@ -25,11 +27,15 @@ public class UIScript : MonoBehaviour
     private GameObject arrow8;
     private GameObject arrow9;
     private GameObject arrow10;
+    //The name of the player
+    private GameObject playerName;
     //A bool to see if the carcaj is opened
     private bool active;
     //The text and number of the arrows left
     private GameObject arrowsLeftText;
     private GameObject arrowsLeftNumb;
+    //The top10 window
+    public GameObject top10;
     //The fast forward button
     private GameObject fastForwardButton;
     //The play and fast forward images
@@ -39,7 +45,7 @@ public class UIScript : MonoBehaviour
     public int bombNumb;
     public int instantNumb;
 
-    private void Start()
+    private void Awake()
     {
         //We find all the gameobjects
         bombNumb = PlayerPrefs.GetInt("Bombs");
@@ -60,6 +66,9 @@ public class UIScript : MonoBehaviour
         arrow10 = GameObject.Find("arrow10Button");
         arrowsLeftText = GameObject.Find("RemainingText");
         arrowsLeftNumb = GameObject.Find("RemainingNumb");
+        endelessController = GameObject.Find("EndlessController");
+        top10 = GameObject.Find("Top10Menu");
+        playerName = GameObject.Find("Top10InputFieldText");
         //We deactivate all the carcaj interface
         arrow1.SetActive(false);
         arrow2.SetActive(false);
@@ -193,6 +202,14 @@ public class UIScript : MonoBehaviour
             active = false;
             bow.GetComponent<bowScript>().carcajOpen = false;
         }        
+    }
+
+    //Function to update the highscores
+    public void UpdateHighscore()
+    {
+        highScoreScript highScoreTableScript = new highScoreScript();
+        highScoreTableScript.AddHighScoreEntry(((int)(Time.fixedTime - endelessController.GetComponent<endlessControllerScript>().startTime)), playerName.GetComponent<Text>().text);
+        top10.SetActive(false);
     }
 
     //Function to put time x2 or normal
