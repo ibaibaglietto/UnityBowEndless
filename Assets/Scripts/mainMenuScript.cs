@@ -61,17 +61,17 @@ public class mainMenuScript : MonoBehaviour
         {
             string json = JsonUtility.ToJson("");
             PlayerPrefs.SetString("highscoreTable", json);
-            highScoreTableScript.AddHighScoreEntry(1000, "GOD");
-            highScoreTableScript.AddHighScoreEntry(800, "IBA");
-            highScoreTableScript.AddHighScoreEntry(720, "ACL");
-            highScoreTableScript.AddHighScoreEntry(600, "AIT");
-            highScoreTableScript.AddHighScoreEntry(420, "JUL");
-            highScoreTableScript.AddHighScoreEntry(300, "IZA");
-            highScoreTableScript.AddHighScoreEntry(200, "XAB");
-            highScoreTableScript.AddHighScoreEntry(100, "AND");
-            highScoreTableScript.AddHighScoreEntry(50, "JOE");
-            highScoreTableScript.AddHighScoreEntry(20, "JOS");
-            PlayerPrefs.SetInt("lastScore", 20);
+            highScoreTableScript.AddHighScoreEntry(600, "GOD");
+            highScoreTableScript.AddHighScoreEntry(500, "IBA");
+            highScoreTableScript.AddHighScoreEntry(420, "ACL");
+            highScoreTableScript.AddHighScoreEntry(360, "AIT");
+            highScoreTableScript.AddHighScoreEntry(280, "JUL");
+            highScoreTableScript.AddHighScoreEntry(235, "IZA");
+            highScoreTableScript.AddHighScoreEntry(190, "XAB");
+            highScoreTableScript.AddHighScoreEntry(150, "AND");
+            highScoreTableScript.AddHighScoreEntry(125, "JOE");
+            highScoreTableScript.AddHighScoreEntry(100, "JOS");
+            PlayerPrefs.SetInt("lastScore", 100);
             PlayerPrefs.Save();
         }
         if (!PlayerPrefs.HasKey("Coins"))
