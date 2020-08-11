@@ -51,9 +51,145 @@ public class mainMenuScript : MonoBehaviour
     //The texts
     private Text buyDamagePriceNumb;
 
+    private Text playButtonText;
+    private Text storeButtonText;
+    private Text configurationButtonText;
+    private Text highscoreButtonText;
+    private Text exitButtonText;
+
+    private Text storeMenuTitle;
+    private Text arrowsButtonText;
+    private Text bowsButtonText;
+    private Text specialButtonText;
+    private Text returnStoreButtonText;
+
+    private Text arrowStoreTitle;
+    private Text regularArrowButtonText;
+    private Text specialArrowButtonText;
+    private Text returnArrowStoreButtonText;
+
+    private Text normalArrowsTitle;
+    private Text buyNormalArrowsExplanationText;
+    private Text blueArrowsText;
+    private Text greyArrowsText;
+    private Text greenArrowsText;
+    private Text redArrowsText;
+    private Text yellowArrowsText;
+    private Text brownArrowsText;
+    private Text returnRegularArrowButtonText;
+
+    private Text specialArrowsTitle;
+    private Text buySpecialArrowsExplanationText;
+    private Text bombArrowsText;
+    private Text instantKillArrowsText;
+    private Text angelicArrowText;
+    private Text returnSpecialArrowStoreText;
+
+    private Text bowStoreTitle;
+    private Text bowStoreExplanationText;
+    private Text bow1Text;
+    private Text bow2Text;
+    private Text bow3Text;
+    private Text bow4Text;
+    private Text bow5Text;
+    private Text bow6Text;
+    private Text returnBowStoreButtonText;
+
+    private Text specialStoreMenuTitle;
+    private Text buyHighscoreText;
+    private Text buyHighscoreButtonText;
+    private Text buyDamageText;
+    private Text buyDamagePriceText;
+    private Text increaseDamageButtonText;
+    private Text actualDamageText;
+    private Text returnSpecialStoreButtonText;
+
+    private Text configurationMenuTitle;
+    private Text languageText;
+    private Text masterText;
+    private Text musicText;
+    private Text effectsText;
+    private Text configurationMenuReturnButtonText;
+
+    private Text highscoreTitleText;
+    private Text positionTitle;
+    private Text scoreTitle;
+    private Text nameTitle;
+    private Text returnHighscoreText;
+
+
+
 
     void Awake()
     {
+        //We find all the texts
+        playButtonText = GameObject.Find("PlayButtonText").GetComponent<Text>();
+        storeButtonText = GameObject.Find("StoreButtonText").GetComponent<Text>();
+        configurationButtonText = GameObject.Find("ConfigurationButtonText").GetComponent<Text>();
+        highscoreButtonText = GameObject.Find("HighscoreButtonText").GetComponent<Text>();
+        exitButtonText = GameObject.Find("ExitButtonText").GetComponent<Text>();
+
+        storeMenuTitle = GameObject.Find("StoreMenuTitle").GetComponent<Text>();
+        arrowsButtonText = GameObject.Find("ArrowsButtonText").GetComponent<Text>();
+        bowsButtonText = GameObject.Find("BowsButtonText").GetComponent<Text>();
+        specialButtonText = GameObject.Find("SpecialButtonText").GetComponent<Text>();
+        returnStoreButtonText = GameObject.Find("ReturnStoreButtonText").GetComponent<Text>();
+
+        arrowStoreTitle = GameObject.Find("ArrowStoreTitle").GetComponent<Text>();
+        regularArrowButtonText = GameObject.Find("RegularArrowButtonText").GetComponent<Text>();
+        specialArrowButtonText = GameObject.Find("SpecialArrowButtonText").GetComponent<Text>();
+        returnArrowStoreButtonText = GameObject.Find("ReturnArrowStoreButtonText").GetComponent<Text>();
+
+        normalArrowsTitle = GameObject.Find("NormalArrowsTitle").GetComponent<Text>();
+        buyNormalArrowsExplanationText = GameObject.Find("BuyNormalArrowsExplanationText").GetComponent<Text>();
+        blueArrowsText = GameObject.Find("BlueArrowsText").GetComponent<Text>();
+        greyArrowsText = GameObject.Find("GreyArrowsText").GetComponent<Text>();
+        greenArrowsText = GameObject.Find("GreenArrowsText").GetComponent<Text>();
+        redArrowsText = GameObject.Find("RedArrowsText").GetComponent<Text>();
+        yellowArrowsText = GameObject.Find("YellowArrowsText").GetComponent<Text>();
+        brownArrowsText = GameObject.Find("BrownArrowsText").GetComponent<Text>();
+        returnRegularArrowButtonText = GameObject.Find("ReturnRegularArrowButtonText").GetComponent<Text>();
+
+        specialArrowsTitle = GameObject.Find("SpecialArrowsTitle").GetComponent<Text>();
+        buySpecialArrowsExplanationText = GameObject.Find("BuySpecialArrowsExplanationText").GetComponent<Text>();
+        bombArrowsText = GameObject.Find("BombArrowsText").GetComponent<Text>();
+        instantKillArrowsText = GameObject.Find("InstantKillArrowsText").GetComponent<Text>();
+        angelicArrowText = GameObject.Find("AngelicArrowText").GetComponent<Text>();
+        returnSpecialArrowStoreText = GameObject.Find("ReturnSpecialArrowStoreText").GetComponent<Text>();
+
+        bowStoreTitle = GameObject.Find("BowStoreTitle").GetComponent<Text>();
+        bowStoreExplanationText = GameObject.Find("BowStoreExplanationText").GetComponent<Text>();
+        bow1Text = GameObject.Find("bow1Text").GetComponent<Text>();
+        bow2Text = GameObject.Find("bow2Text").GetComponent<Text>();
+        bow3Text = GameObject.Find("bow3Text").GetComponent<Text>();
+        bow4Text = GameObject.Find("bow4Text").GetComponent<Text>();
+        bow5Text = GameObject.Find("bow5Text").GetComponent<Text>();
+        bow6Text = GameObject.Find("bow6Text").GetComponent<Text>();
+        returnBowStoreButtonText = GameObject.Find("ReturnBowStoreButtonText").GetComponent<Text>();
+
+        specialStoreMenuTitle = GameObject.Find("SpecialStoreMenuTitle").GetComponent<Text>();
+        buyHighscoreText = GameObject.Find("BuyHighscoreText").GetComponent<Text>();
+        buyHighscoreButtonText = GameObject.Find("BuyHighscoreButtonText").GetComponent<Text>();
+        buyDamageText = GameObject.Find("BuyDamageText").GetComponent<Text>();
+        buyDamagePriceText = GameObject.Find("BuyDamagePriceText").GetComponent<Text>();
+        increaseDamageButtonText = GameObject.Find("IncreaseDamageButtonText").GetComponent<Text>();
+        actualDamageText = GameObject.Find("ActualDamageText").GetComponent<Text>();
+        returnSpecialStoreButtonText = GameObject.Find("ReturnSpecialStoreButtonText").GetComponent<Text>();
+
+        configurationMenuTitle = GameObject.Find("ConfigurationMenuTitle").GetComponent<Text>();
+        languageText = GameObject.Find("LanguageText").GetComponent<Text>();
+        masterText = GameObject.Find("MasterText").GetComponent<Text>();
+        musicText = GameObject.Find("MusicText").GetComponent<Text>();
+        effectsText = GameObject.Find("EffectsText").GetComponent<Text>();
+        configurationMenuReturnButtonText = GameObject.Find("ConfigurationMenuReturnButtonText").GetComponent<Text>();
+
+        highscoreTitleText = GameObject.Find("HighscoreTitleText").GetComponent<Text>();
+        positionTitle = GameObject.Find("PositionTitle").GetComponent<Text>();
+        scoreTitle = GameObject.Find("ScoreTitle").GetComponent<Text>();
+        nameTitle = GameObject.Find("NameTitle").GetComponent<Text>();
+        returnHighscoreText = GameObject.Find("ReturnHighscoreText").GetComponent<Text>();
+
+
         highScoreScript highScoreTableScript = new highScoreScript();
 
         //We initialize the playerprefs
@@ -142,6 +278,7 @@ public class mainMenuScript : MonoBehaviour
         {
             PlayerPrefs.SetFloat("UpgradeMultiplier", 0.0f);
         }
+        if (!PlayerPrefs.HasKey("Language")) PlayerPrefs.SetInt("Language", 1); //1-> english, 2-> spanish, 3-> basque
         //We find all the gameobjects
         mainMenu = GameObject.Find("MainMenu");
         storeMenu = GameObject.Find("StoreMenu");
@@ -168,7 +305,7 @@ public class mainMenuScript : MonoBehaviour
         instantkillNumb = GameObject.Find("InstantKillArrowsNumb");
         bowStoreMenu = GameObject.Find("BowStoreMenu");
         specialStoreMenu = GameObject.Find("SpecialStoreMenu");
-        actualDamage = GameObject.Find("ActualDamage");
+        actualDamage = GameObject.Find("ActualDamageNumb");
         actualDamage.GetComponent<Text>().text = PlayerPrefs.GetFloat("UpgradeMultiplier").ToString();
         coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
         buyDamagePriceNumb = GameObject.Find("BuyDamagePriceNumb").GetComponent<Text>();
@@ -203,6 +340,10 @@ public class mainMenuScript : MonoBehaviour
         bow4Bought.SetActive(PlayerPrefs.GetInt("Bow4") == 1);
         bow5Bought.SetActive(PlayerPrefs.GetInt("Bow5") == 1);
         bow6Bought.SetActive(PlayerPrefs.GetInt("Bow6") == 1);
+       
+
+
+
         //We save what bow we are using
         if (PlayerPrefs.GetInt("UsingBow") == 1)
         {
@@ -229,6 +370,211 @@ public class mainMenuScript : MonoBehaviour
             bow6Bought.GetComponent<Image>().color = Color.yellow;
         }
         buyDamagePriceNumb.text = (5000 + PlayerPrefs.GetFloat("UpgradeMultiplier") * 30000).ToString();
+
+        if(PlayerPrefs.GetInt("Language") == 1)
+        {
+            playButtonText.text = "Play";
+            storeButtonText.text = "Store";
+            configurationButtonText.text = "Configuration";
+            highscoreButtonText.text = "High scores";
+            exitButtonText.text = "Exit";
+
+            storeMenuTitle.text = "Store";
+            arrowsButtonText.text = "Arrows";
+            bowsButtonText.text = "Bows";
+            specialButtonText.text = "Special";
+            returnStoreButtonText.text = "Return";
+
+            arrowStoreTitle.text = "Arrows";
+            regularArrowButtonText.text = "Normal arrows";
+            specialArrowButtonText.text = "Special arrows";
+            returnArrowStoreButtonText.text = "Return";
+
+            normalArrowsTitle.text = "Normal arrows";
+            buyNormalArrowsExplanationText.text = "Each type of arrow does more damage and pushes backwards one enemy class. Buy the arrows spending 200.";
+            blueArrowsText.text = "Blue \narrows";
+            greyArrowsText.text = "Grey \narrows";
+            greenArrowsText.text = "Green \narrows";
+            redArrowsText.text = "Red \narrows";
+            yellowArrowsText.text = "Yellow \narrows";
+            brownArrowsText.text = "Brown \narrows";
+            returnRegularArrowButtonText.text = "Return";
+
+            specialArrowsTitle.text = "Especial arrows";
+            buySpecialArrowsExplanationText.text = "Welcome to the special arrow store. Here you can buy three types of arrow: bomb arrows (100 coins), instant kill arrows (100 coins) and angelic arrows (1000 coins). The first two are limited and you will need to buy them each time you use one, you can have 10 bomb arrows and 5 instant kill arrows. Speaking about angelic arrows, you will only need to buy them once.";
+            bombArrowsText.text = "Bomb \narrows";
+            instantKillArrowsText.text = "Instant kill arrows";
+            angelicArrowText.text = "Angelic arrows";
+            returnSpecialArrowStoreText.text = "Return";
+
+            bowStoreTitle.text = "Bows";
+            bowStoreExplanationText.text = "Welcome to the arrow store. You can buy and equip bows here.";
+            bow1Text.text = "Games worst bow, but it’s free.";
+            bow2Text.text = "Upgrades a bit the shooting speed and the damage. Price: 500";
+            bow3Text.text = "It’s exactly the same as the previous one, but it shoots two arrows. Price: 1000";
+            bow4Text.text = "It upgrades a bit the shooting speed and the damage. Price: 1500";
+            bow5Text.text = "It upgrades again the shooting speed and the damage, did you expect it to worsen? Price: 2000";
+            bow6Text.text = "It upgrades the damage a lot and it shoots three arrows, you can’t ask for more. Price: 3000";
+            returnBowStoreButtonText.text = "Return";
+
+            specialStoreMenuTitle.text = "Special articles";
+            buyHighscoreText.text = "High scores. \nPrice: 2000";
+            buyHighscoreButtonText.text = "Buy";
+            buyDamageText.text = "Add 0.1 to the damage multiplier.";
+            buyDamagePriceText.text = "Price:";
+            increaseDamageButtonText.text = "Buy";
+            actualDamageText.text = "Actual multiplier:";
+            returnSpecialStoreButtonText.text = "Return";
+
+            configurationMenuTitle.text = "Configuration";
+            languageText.text = "Language:";
+            masterText.text = "Main volume:";
+            musicText.text = "Music:";
+            effectsText.text = "Effects:";
+            configurationMenuReturnButtonText.text = "Return";
+
+            highscoreTitleText.text = "High scores";
+            positionTitle.text = "POSITION";
+            scoreTitle.text = "SCORE";
+            nameTitle.text = "NAME";
+            returnHighscoreText.text = "Return";
+        }
+        else if (PlayerPrefs.GetInt("Language") == 2)
+        {
+            playButtonText.text = "Jugar";
+            storeButtonText.text = "Tienda";
+            configurationButtonText.text = "Configuración";
+            highscoreButtonText.text = "Puntuaciones";
+            exitButtonText.text = "Salir";
+
+            storeMenuTitle.text = "Tienda";
+            arrowsButtonText.text = "Flechas";
+            bowsButtonText.text = "Arcos";
+            specialButtonText.text = "Especial";
+            returnStoreButtonText.text = "Volver";
+
+            arrowStoreTitle.text = "Flechas";
+            regularArrowButtonText.text = "Flechas normales";
+            specialArrowButtonText.text = "Flechas especiales";
+            returnArrowStoreButtonText.text = "Volver";
+
+            normalArrowsTitle.text = "Flechas normales";
+            buyNormalArrowsExplanationText.text = "Cada tipo de flecha hace más daño a un tipo concreto de enemigo y le empuja hacia atrás. Para comprar las flechas realiza un único pago de 200.";
+            blueArrowsText.text = "Flechas \nazules";
+            greyArrowsText.text = "Flechas \ngrises";
+            greenArrowsText.text = "Flechas \nverdes";
+            redArrowsText.text = "Flechas \nrojas";
+            yellowArrowsText.text = "Flechas \namarillas";
+            brownArrowsText.text = "Flechas \nmarrones";
+            returnRegularArrowButtonText.text = "Volver";
+
+            specialArrowsTitle.text = "Flechas especiales";
+            buySpecialArrowsExplanationText.text = "Bienvenido a la tienda de flechas especiales. Aquí podrás encontrar tres tipos de flecha: flechas bomba, 100 monedas, flechas de muerte instantánea, 100 monedas, y flechas angelicales, 1000 monedas. Las dos primeras son limitadas y tendrás que comprarlas con cada uso, 10 y 5 respectivamente. En el caso de las flechas angelicales solo tendrás que realizar una compra.";
+            bombArrowsText.text = "Flechas \nbomba";
+            instantKillArrowsText.text = "Flechas de muerte instantánea";
+            angelicArrowText.text = "Flechas angelicales";
+            returnSpecialArrowStoreText.text = "Volver";
+
+            bowStoreTitle.text = "Arcos";
+            bowStoreExplanationText.text = "Bienvenido a la tienda de arcos. Además de comprar los arcos en esta misma ventana puedes elegir el arco que usaras en el juego.";
+            bow1Text.text = "El peor arco del juego, pero es gratis.";
+            bow2Text.text = "Mejora un poco la velocidad de disparo y el daño. Precio: 500";
+            bow3Text.text = "Es exactamente igual a su predecesor, pero lanza dos flechas en lugar de una. Precio: 1000";
+            bow4Text.text = "Mejora ligeramente la velocidad de disparo y el daño. Precio: 1500";
+            bow5Text.text = "Vuelve a mejorar ligeramente la velocidad de disparo y el daño, ¿qué esperabas, que bajaran? Precio: 2000";
+            bow6Text.text = "Mejora ampliamente el daño y lanza 3 flechas, ¿qué más se le podría pedir? Precio: 3000";
+            returnBowStoreButtonText.text = "Volver";
+
+            specialStoreMenuTitle.text = "Artículos especiales";
+            buyHighscoreText.text = "Tabla de puntuaciones. \nPrecio: 2000";
+            buyHighscoreButtonText.text = "Comprar";
+            buyDamageText.text = "Sumar 0.1 al multiplicador de daño.";
+            buyDamagePriceText.text = "Precio:";
+            increaseDamageButtonText.text = "Comprar";
+            actualDamageText.text = "Multiplicador actual:";
+            returnSpecialStoreButtonText.text = "Volver";
+
+            configurationMenuTitle.text = "Configuración";
+            languageText.text = "Idioma:";
+            masterText.text = "Volumen maestro:";
+            musicText.text = "Música:";
+            effectsText.text = "Efectos:";
+            configurationMenuReturnButtonText.text = "Volver";
+
+            highscoreTitleText.text = "Tabla de puntuaciones";
+            positionTitle.text = "POSICIÓN";
+            scoreTitle.text = "PUNTUACIÓN";
+            nameTitle.text = "NOMBRE";
+            returnHighscoreText.text = "Volver";
+        }
+        else if (PlayerPrefs.GetInt("Language") == 3)
+        {
+            playButtonText.text = "Jolastu";
+            storeButtonText.text = "Denda";
+            configurationButtonText.text = "Konfigurazioa";
+            highscoreButtonText.text = "Puntuazioak";
+            exitButtonText.text = "Irten";
+
+            storeMenuTitle.text = "Denda";
+            arrowsButtonText.text = "Geziak";
+            bowsButtonText.text = "Arkuak";
+            specialButtonText.text = "Berezia";
+            returnStoreButtonText.text = "Itzuli";
+
+            arrowStoreTitle.text = "Geziak";
+            regularArrowButtonText.text = "Gezi normalak";
+            specialArrowButtonText.text = "Gezi bereziak";
+            returnArrowStoreButtonText.text = "Itzuli";
+
+            normalArrowsTitle.text = "Gezi normalak";
+            buyNormalArrowsExplanationText.text = "Gezi mota bakoitzak etsai mota bateri min gehiago egiten dio eta atzerantz bultzatzen du. Geziak erosi 200 gastatuz.";
+            blueArrowsText.text = "Gezi \nurdinak";
+            greyArrowsText.text = "Gezi \ngrisak";
+            greenArrowsText.text = "Gezi \nberdeak";
+            redArrowsText.text = "Gezi \ngorriak";
+            yellowArrowsText.text = "Gezi \nhoriak";
+            brownArrowsText.text = "Gezi \nmarroiak";
+            returnRegularArrowButtonText.text = "Itzuli";
+
+            specialArrowsTitle.text = "Gezi bereziak";
+            buySpecialArrowsExplanationText.text = "Ongi etorri gezi berezien dendara. Hemen hiru motako geziak erosi ahalko dituzu: bonbadun geziak, 100 txanpon, istanteko heriotzeko geziak, 100 txanpon, eta aingeruen geziak, 1000 txanpon. Lehengo biak mugatuak dira eta erabilera bakoitzarekin erosi beharko dituzu, 10 bonba eta 5 istanteko heriotz izan ditzakezu. Aingeruen gezien kasuan behin bakarrik erosi beharko dituzu.";
+            bombArrowsText.text = "Bonbadun \ngeziak";
+            instantKillArrowsText.text = "Istanteko heriotzeko geziak";
+            angelicArrowText.text = "Aingeruen geziak";
+            returnSpecialArrowStoreText.text = "Itzuli";
+
+            bowStoreTitle.text = "Arkuak";
+            bowStoreExplanationText.text = "Ongi etorri arkuen dendara. Arkuak erosteaz gain, leiho honetan zein arku erabili erabaki dezakezu. ";
+            bow1Text.text = "Jokoko arku txarrena, baina doan da.";
+            bow2Text.text = "Jaurtiketa abiadura eta mina pixka bat hobetzen ditu. Prezioa: 500";
+            bow3Text.text = "Aurrekoaren berdina da, baina bi gezi jaurtitzen ditu baten beharrean. Prezioa: 1000";
+            bow4Text.text = "Jaurtiketa abiadura eta mina pixka bat hobetzen ditu. Prezioa: 1500";
+            bow5Text.text = "Jaurtiketa abiadura eta mina pixka bat hobetzen ditu berriz, zer espero zenuen, hauek jaistea? Prezioa: 2000";
+            bow6Text.text = "Mina asko hobetzen du eta 3 gezi jaurtitzen ditu, zer gehiago eskatu ahal zaio? Prezioa: 3000";
+            returnBowStoreButtonText.text = "Itzuli";
+
+            specialStoreMenuTitle.text = "Artikulu bereziak";
+            buyHighscoreText.text = "Puntuazio taula. \nPrezioa: 2000";
+            buyHighscoreButtonText.text = "Erosi";
+            buyDamageText.text = "0.1 gehitu min bidertzaileari.";
+            buyDamagePriceText.text = "Prezioa:";
+            increaseDamageButtonText.text = "Erosi";
+            actualDamageText.text = "Momentuko bidertzailea:";
+            returnSpecialStoreButtonText.text = "Itzuli";
+
+            configurationMenuTitle.text = "Konfigurazioa";
+            languageText.text = "Hizkuntza:";
+            masterText.text = "Bolumen nagusia:";
+            musicText.text = "Musika:";
+            effectsText.text = "Efektuak:";
+            configurationMenuReturnButtonText.text = "Itzuli";
+
+            highscoreTitleText.text = "Puntuazio taula";
+            positionTitle.text = "POSIZIOA";
+            scoreTitle.text = "PUNTUAZIOA";
+            nameTitle.text = "IZENA";
+            returnHighscoreText.text = "Itzuli";
+        }
     }
 
 
