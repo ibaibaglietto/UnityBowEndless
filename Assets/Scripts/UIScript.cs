@@ -31,7 +31,8 @@ public class UIScript : MonoBehaviour
     private GameObject playerName;
     //A bool to see if the carcaj is opened
     private bool active;
-    //The text and number of the arrows left
+    //The backgorund, text and number of the arrows left
+    private GameObject arrowsLeftBck;
     private GameObject arrowsLeftText;
     private GameObject arrowsLeftNumb;
     //The top10 window
@@ -44,9 +45,43 @@ public class UIScript : MonoBehaviour
     //The number of bombs and instant kill arrows
     public int bombNumb;
     public int instantNumb;
+    //The texts we are translating
+    private Text remainingText;
+
+    private Text endMenuText;
+    private Text restarnEndMenuText;
+    private Text menuEndMenuText;
+    private Text endScoreText;
+    private Text endTotalCoinsText;
+
+    private Text continuePauseText;
+    private Text restartPauseText;
+    private Text menuPauseText;
+
+    private Text top10Text;
+    private Text top10InputFieldPlaceholder;
+    private Text top10ButtonText;
 
     private void Awake()
     {
+        //We find all the texts
+        remainingText = GameObject.Find("RemainingText").GetComponent<Text>();
+
+        endMenuText = GameObject.Find("EndMenuText").GetComponent<Text>();
+        restarnEndMenuText = GameObject.Find("RestartEndMenuText").GetComponent<Text>();
+        menuEndMenuText = GameObject.Find("MenuEndMenuText").GetComponent<Text>();
+        endScoreText = GameObject.Find("EndScoreText").GetComponent<Text>();
+        endTotalCoinsText = GameObject.Find("EndTotalCoinsText").GetComponent<Text>();
+
+        continuePauseText = GameObject.Find("ContinuePauseText").GetComponent<Text>();
+        restartPauseText = GameObject.Find("RestartPauseText").GetComponent<Text>();
+        menuPauseText = GameObject.Find("MenuPauseText").GetComponent<Text>();
+
+        top10Text = GameObject.Find("Top10Text").GetComponent<Text>();
+        top10InputFieldPlaceholder = GameObject.Find("Top10InputFieldPlaceholder").GetComponent<Text>();
+        top10ButtonText = GameObject.Find("Top10ButtonText").GetComponent<Text>();
+
+
         //We find all the gameobjects
         bombNumb = PlayerPrefs.GetInt("Bombs");
         instantNumb = PlayerPrefs.GetInt("InstantKills");
@@ -64,6 +99,7 @@ public class UIScript : MonoBehaviour
         arrow8 = GameObject.Find("arrow8Button");
         arrow9 = GameObject.Find("arrow9Button");
         arrow10 = GameObject.Find("arrow10Button");
+        arrowsLeftBck = GameObject.Find("RemainingBck");
         arrowsLeftText = GameObject.Find("RemainingText");
         arrowsLeftNumb = GameObject.Find("RemainingNumb");
         endelessController = GameObject.Find("EndlessController");
@@ -80,6 +116,7 @@ public class UIScript : MonoBehaviour
         arrow8.SetActive(false);
         arrow9.SetActive(false);
         arrow10.SetActive(false);
+        arrowsLeftBck.SetActive(false);
         arrowsLeftText.SetActive(false);
         arrowsLeftNumb.SetActive(false);
         active = false;
@@ -88,6 +125,62 @@ public class UIScript : MonoBehaviour
         pauseMenu.SetActive(false);
         //We put the paused bool to false
         bow.GetComponent<bowScript>().paused = false;
+
+        //We save the translations
+        if (PlayerPrefs.GetInt("Language") == 0)
+        {
+            remainingText.text = "Remaining arrows:";
+
+            endMenuText.text = "You lost!";
+            restarnEndMenuText.text = "Restart";
+            menuEndMenuText.text = "Main menu";
+            endScoreText.text = "Final score:";
+            endTotalCoinsText.text = "Total coins:";
+
+            continuePauseText.text = "Continue";
+            restartPauseText.text = "Restart";
+            menuPauseText.text = "Main menu";
+
+            top10Text.text = "You entered the top 10, congratulations! Enter your name to save the score.";
+            top10InputFieldPlaceholder.text = "Name";
+            top10ButtonText.text = "Save";
+        }
+        else if (PlayerPrefs.GetInt("Language") == 1)
+        {
+            remainingText.text = "Flechas restantes:";
+
+            endMenuText.text = "¡Has perdido!";
+            restarnEndMenuText.text = "Reiniciar";
+            menuEndMenuText.text = "Menú";
+            endScoreText.text = "Puntuación final:";
+            endTotalCoinsText.text = "Monedas totales:";
+
+            continuePauseText.text = "Continuar";
+            restartPauseText.text = "Reiniciar";
+            menuPauseText.text = "Menú";
+
+            top10Text.text = "¡Has conseguido entrar en el top 10 de mejores puntuaciones! Introduce tu nombre para guardar la puntuación.";
+            top10InputFieldPlaceholder.text = "Nombre";
+            top10ButtonText.text = "Guardar";
+        }
+        else if (PlayerPrefs.GetInt("Language") == 2)
+        {
+            remainingText.text = "Gainerako geziak:";
+
+            endMenuText.text = "Galdu duzu!";
+            restarnEndMenuText.text = "Berrabiatu";
+            menuEndMenuText.text = "Menua";
+            endScoreText.text = "Puntuazio finala:";
+            endTotalCoinsText.text = "Txanponak guztira:";
+
+            continuePauseText.text = "Jarraitu";
+            restartPauseText.text = "Berrabiatu";
+            menuPauseText.text = "Menua";
+
+            top10Text.text = "Top 10ean sartzea lortu duzu! Sartu zure izena puntuazioa gordetzeko.";
+            top10InputFieldPlaceholder.text = "Izena";
+            top10ButtonText.text = "Gorde";
+        }
     }
 
     //Function to pause and resume the game
@@ -238,18 +331,21 @@ public class UIScript : MonoBehaviour
         //We decrease the number of bomb arrows or instant kill arrows if we use them
         if(bow.GetComponent<bowScript>().arrowType == 3)
         {
+            arrowsLeftBck.SetActive(true);
             arrowsLeftText.SetActive(true);
             arrowsLeftNumb.SetActive(true);
             arrowsLeftNumb.GetComponent<Text>().text = bombNumb.ToString();
         }
         else if(bow.GetComponent<bowScript>().arrowType == 6)
         {
+            arrowsLeftBck.SetActive(true);
             arrowsLeftText.SetActive(true);
             arrowsLeftNumb.SetActive(true);
             arrowsLeftNumb.GetComponent<Text>().text = instantNumb.ToString();
         }
         else
         {
+            arrowsLeftBck.SetActive(false);
             arrowsLeftText.SetActive(false);
             arrowsLeftNumb.SetActive(false);
         }
