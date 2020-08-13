@@ -52,6 +52,7 @@ public class UIScript : MonoBehaviour
     private Text restarnEndMenuText;
     private Text menuEndMenuText;
     private Text endScoreText;
+    private Text endCoinsText;
     private Text endTotalCoinsText;
 
     private Text continuePauseText;
@@ -71,6 +72,7 @@ public class UIScript : MonoBehaviour
         restarnEndMenuText = GameObject.Find("RestartEndMenuText").GetComponent<Text>();
         menuEndMenuText = GameObject.Find("MenuEndMenuText").GetComponent<Text>();
         endScoreText = GameObject.Find("EndScoreText").GetComponent<Text>();
+        endCoinsText = GameObject.Find("EndGainedCoinsText").GetComponent<Text>();
         endTotalCoinsText = GameObject.Find("EndTotalCoinsText").GetComponent<Text>();
 
         continuePauseText = GameObject.Find("ContinuePauseText").GetComponent<Text>();
@@ -135,6 +137,7 @@ public class UIScript : MonoBehaviour
             restarnEndMenuText.text = "Restart";
             menuEndMenuText.text = "Main menu";
             endScoreText.text = "Final score:";
+            endCoinsText.text = "Gained coins:";
             endTotalCoinsText.text = "Total coins:";
 
             continuePauseText.text = "Continue";
@@ -153,6 +156,7 @@ public class UIScript : MonoBehaviour
             restarnEndMenuText.text = "Reiniciar";
             menuEndMenuText.text = "Menú";
             endScoreText.text = "Puntuación final:";
+            endCoinsText.text = "Monedas ganadas:";
             endTotalCoinsText.text = "Monedas totales:";
 
             continuePauseText.text = "Continuar";
@@ -171,6 +175,7 @@ public class UIScript : MonoBehaviour
             restarnEndMenuText.text = "Berrabiatu";
             menuEndMenuText.text = "Menua";
             endScoreText.text = "Puntuazio finala:";
+            endCoinsText.text = "Irabazitako txanponak:";
             endTotalCoinsText.text = "Txanponak guztira:";
 
             continuePauseText.text = "Jarraitu";

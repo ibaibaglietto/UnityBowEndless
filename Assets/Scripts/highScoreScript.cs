@@ -11,7 +11,7 @@ public class highScoreScript : MonoBehaviour
     private List<Transform> highscoreEntryTransformList;
     private float h = Screen.height;
 
-    private void Awake()
+    private void Start()
     {
 
         entryContainer = transform.Find("highScoreEntryContainer");

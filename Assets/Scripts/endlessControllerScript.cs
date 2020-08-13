@@ -42,7 +42,6 @@ public class endlessControllerScript : MonoBehaviour
     
     void Start()
     {
-        Debug.Log("iniciado");
         //We find the score
         score = GameObject.Find("Score");
         //We initialize the lastRy and the last Monser
@@ -64,7 +63,6 @@ public class endlessControllerScript : MonoBehaviour
         {
             coinsGained += coinsPerSecond;
             lastCoin = Time.fixedTime;
-            Debug.Log(coinsPerSecond);
             coinsPerSecond += 0.015f;
         }
         //The score is the seconds that passed from the beginning of the game

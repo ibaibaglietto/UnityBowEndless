@@ -60,11 +60,12 @@ public class playerLifeScript : MonoBehaviour
                     Time.timeScale = 0f;
                     endMenu.SetActive(true);
                     PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + (int)endelessController.GetComponent<endlessControllerScript>().coinsGained);
-                    endMenu.transform.Find("EndScore").GetComponent<Text>().text = ((int)endelessController.GetComponent<endlessControllerScript>().coinsGained).ToString();
+                    endMenu.transform.Find("EndScore").GetComponent<Text>().text = score.GetComponent<Text>().text;
+                    endMenu.transform.Find("EndCoins").GetComponent<Text>().text = ((int)endelessController.GetComponent<endlessControllerScript>().coinsGained).ToString();
                     endMenu.transform.Find("EndTotalCoins").GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
                     PlayerPrefs.SetInt("Bombs", canvas.GetComponent<UIScript>().bombNumb);
                     PlayerPrefs.SetInt("InstantKills", canvas.GetComponent<UIScript>().instantNumb);
-                    if (PlayerPrefs.GetInt("lastScore") < int.Parse(score.GetComponent<Text>().text)) top10.SetActive(true);
+                    if (PlayerPrefs.GetInt("lastScore") < int.Parse(score.GetComponent<Text>().text) && PlayerPrefs.GetInt("highscoreUnlocked") == 1) top10.SetActive(true);
                 }                
             }
         }

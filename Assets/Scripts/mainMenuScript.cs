@@ -8,6 +8,8 @@ public class mainMenuScript : MonoBehaviour
 {
     //The main menu
     private GameObject mainMenu;
+    //The highscore button
+    private GameObject highscoreButton;
     //The store menu
     private GameObject storeMenu;
     //The configuration menu
@@ -26,6 +28,8 @@ public class mainMenuScript : MonoBehaviour
     private GameObject bowStoreMenu;
     //The special store menu
     private GameObject specialStoreMenu;
+    //The button to buy the highscore table
+    private Button buyHighscoreButton;
     //The number of bombs purchased
     private GameObject bombNumb;
     //The number of instant kill arrows purchased
@@ -221,7 +225,7 @@ public class mainMenuScript : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey("Coins"))
         {
-            PlayerPrefs.SetInt("Coins", 1);
+            PlayerPrefs.SetInt("Coins", 99999);
         }
         if (!PlayerPrefs.HasKey("Bombs"))
         {
@@ -289,9 +293,12 @@ public class mainMenuScript : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey("Language")) PlayerPrefs.SetInt("Language", 0); //0-> english, 1-> spanish, 2-> basque
         if (!PlayerPrefs.HasKey("languageChoosen")) PlayerPrefs.SetInt("languageChoosen", 0);
+        if (!PlayerPrefs.HasKey("highscoreUnlocked")) PlayerPrefs.SetInt("highscoreUnlocked", 0);
 
 
         //We find all the gameobjects
+        buyHighscoreButton = GameObject.Find("BuyHighscoreButton").GetComponent<Button>();
+        highscoreButton = GameObject.Find("HighscoreButton"); 
         LanguageSelectionMenu = GameObject.Find("FirstLanguageMenu");
         LanguageChooseDropdown = GameObject.Find("FirstLanguageDropdown").GetComponent<Dropdown>();
         LanguageDropdown = GameObject.Find("LanguageDropdown").GetComponent<Dropdown>();
@@ -325,6 +332,9 @@ public class mainMenuScript : MonoBehaviour
         coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
         buyDamagePriceNumb = GameObject.Find("BuyDamagePriceNumb").GetComponent<Text>();
         //We deactivate some gameobjects
+
+        if (PlayerPrefs.GetInt("highscoreUnlocked") == 0) highscoreButton.SetActive(false);
+        else buyHighscoreButton.interactable = false;
         storeMenu.SetActive(false);
         configurationMenu.SetActive(false);
         highscoreMenu.SetActive(false);
@@ -1058,6 +1068,19 @@ public class mainMenuScript : MonoBehaviour
                 arrow10Bought.SetActive(true);
                 coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             }
+        }
+    }
+
+    //Function to unlock the highscores
+    public void UnlockHighScores()
+    {
+        if (PlayerPrefs.GetInt("Coins") >= 2000)
+        {
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 2000);
+            coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
+            highscoreButton.SetActive(true);
+            buyHighscoreButton.interactable = false;
+            PlayerPrefs.SetInt("highscoreUnlocked", 1);
         }
     }
 

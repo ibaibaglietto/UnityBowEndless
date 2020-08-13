@@ -42,6 +42,8 @@ public class bowScript : MonoBehaviour
     public float damageMultipier;
     //The screen height
     float h = Screen.height;
+    //The screen eidth
+    float w = Screen.width;
     //A bool to see if the game is paused
     public bool paused;
     //A bool to see if the player is dead
@@ -177,8 +179,10 @@ public class bowScript : MonoBehaviour
                         }
                         else if (arrowNumber == 2)
                         {
-                            Vector2 dir1 = Camera.main.ScreenToWorldPoint(new Vector2(touch.position.x, touch.position.y - 20.5f)) - transform.position;
-                            var angle1 = Mathf.Atan2(dir1.y, dir1.x) * Mathf.Rad2Deg;
+                            Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                            var angle1 = angle - 0.75f;
+                            Vector2 dir1 = new Vector2(99999.0f * Mathf.Cos(angle1 * Mathf.Deg2Rad) + transform.position.x, 99999.0f * Mathf.Sin(angle1 * Mathf.Deg2Rad) + transform.position.y);
                             var rot1 = Quaternion.AngleAxis(angle1, Vector3.forward);
                             if (arrowType == 1) arrowSolo = Instantiate(arrow1, transform.position, rot1);
                             else if (arrowType == 2) arrowSolo = Instantiate(arrow2, transform.position, rot1);
@@ -195,8 +199,8 @@ public class bowScript : MonoBehaviour
                             arrowSolo.GetComponent<destroyArrowScript>().type = arrowType;
                             arrowSolo.GetComponent<destroyArrowScript>().explosion = explosion;
                             arrowSolo.GetComponent<Rigidbody2D>().velocity = dir1 * arrowSpeed;
-                            Vector2 dir2 = Camera.main.ScreenToWorldPoint(new Vector2(touch.position.x, touch.position.y + 20.5f)) - transform.position;
-                            var angle2 = Mathf.Atan2(dir2.y, dir2.x) * Mathf.Rad2Deg;
+                            var angle2 = angle + 0.75f;
+                            Vector2 dir2 = new Vector2(99999.0f * Mathf.Cos(angle2 * Mathf.Deg2Rad) + transform.position.x, 99999.0f * Mathf.Sin(angle2 * Mathf.Deg2Rad) + transform.position.y);
                             var rot2 = Quaternion.AngleAxis(angle2, Vector3.forward);
                             if (arrowType == 1) arrowDuo = Instantiate(arrow1, transform.position, rot2);
                             else if (arrowType == 2) arrowDuo = Instantiate(arrow2, transform.position, rot2);
@@ -216,8 +220,10 @@ public class bowScript : MonoBehaviour
                         }
                         else if (arrowNumber == 3)
                         {
-                            Vector2 dir1 = Camera.main.ScreenToWorldPoint(new Vector2(touch.position.x, touch.position.y - 20.5f)) - transform.position;
-                            var angle1 = Mathf.Atan2(dir1.y, dir1.x) * Mathf.Rad2Deg;
+                            Vector2 dir3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                            var angle3 = Mathf.Atan2(dir3.y, dir3.x) * Mathf.Rad2Deg;
+                            var angle1 = angle3 - 0.75f;
+                            Vector2 dir1 = new Vector2(99999.0f * Mathf.Cos(angle1 * Mathf.Deg2Rad) + transform.position.x, 99999.0f * Mathf.Sin(angle1 * Mathf.Deg2Rad) + transform.position.y);
                             var rot1 = Quaternion.AngleAxis(angle1, Vector3.forward);
                             if (arrowType == 1) arrowSolo = Instantiate(arrow1, transform.position, rot1);
                             else if (arrowType == 2) arrowSolo = Instantiate(arrow2, transform.position, rot1);
@@ -234,8 +240,8 @@ public class bowScript : MonoBehaviour
                             arrowSolo.GetComponent<destroyArrowScript>().type = arrowType;
                             arrowSolo.GetComponent<destroyArrowScript>().explosion = explosion;
                             arrowSolo.GetComponent<Rigidbody2D>().velocity = dir1 * arrowSpeed;
-                            Vector2 dir2 = Camera.main.ScreenToWorldPoint(new Vector2(touch.position.x, touch.position.y + 20.5f)) - transform.position;
-                            var angle2 = Mathf.Atan2(dir2.y, dir2.x) * Mathf.Rad2Deg;
+                            var angle2 = angle3 + 0.75f;
+                            Vector2 dir2 = new Vector2(99999.0f * Mathf.Cos(angle2 * Mathf.Deg2Rad) + transform.position.x, 99999.0f * Mathf.Sin(angle2 * Mathf.Deg2Rad) + transform.position.y);
                             var rot2 = Quaternion.AngleAxis(angle2, Vector3.forward);
                             if (arrowType == 1) arrowDuo = Instantiate(arrow1, transform.position, rot2);
                             else if (arrowType == 2) arrowDuo = Instantiate(arrow2, transform.position, rot2);
@@ -252,8 +258,6 @@ public class bowScript : MonoBehaviour
                             arrowDuo.GetComponent<destroyArrowScript>().type = arrowType;
                             arrowDuo.GetComponent<destroyArrowScript>().explosion = explosion;
                             arrowDuo.GetComponent<Rigidbody2D>().velocity = dir2 * arrowSpeed;
-                            Vector2 dir3 = Camera.main.ScreenToWorldPoint(touch.position) - transform.position;
-                            var angle3 = Mathf.Atan2(dir3.y, dir3.x) * Mathf.Rad2Deg;
                             var rot3 = Quaternion.AngleAxis(angle3, Vector3.forward);
                             if (arrowType == 1) arrowTrio = Instantiate(arrow1, transform.position, rot3);
                             else if (arrowType == 2) arrowTrio = Instantiate(arrow2, transform.position, rot3);
@@ -312,6 +316,7 @@ public class bowScript : MonoBehaviour
                     {
                         Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                        Debug.Log(Mathf.Abs(Mathf.Abs(angle)-90.0f)/90.0f);
                         var rot = Quaternion.AngleAxis(angle, Vector3.forward);
                         if (arrowType == 1) arrowSolo = Instantiate(arrow1, transform.position, rot);
                         else if (arrowType == 2) arrowSolo = Instantiate(arrow2, transform.position, rot);
@@ -331,8 +336,11 @@ public class bowScript : MonoBehaviour
                     }
                     if (arrowNumber == 2)
                     {
-                        Vector2 dir1 = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y - h * 0.02f, Input.mousePosition.z)) - transform.position;
-                        var angle1 = Mathf.Atan2(dir1.y, dir1.x) * Mathf.Rad2Deg;
+                        Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                        var angle1 = angle - 0.75f;
+                        Vector2 dir1 = new Vector2(99999.0f * Mathf.Cos(angle1 * Mathf.Deg2Rad) + transform.position.x, 99999.0f * Mathf.Sin(angle1 * Mathf.Deg2Rad) + transform.position.y);
+                        
                         var rot1 = Quaternion.AngleAxis(angle1, Vector3.forward);
                         if (arrowType == 1) arrowSolo = Instantiate(arrow1, transform.position, rot1);
                         else if (arrowType == 2) arrowSolo = Instantiate(arrow2, transform.position, rot1);
@@ -349,8 +357,8 @@ public class bowScript : MonoBehaviour
                         arrowSolo.GetComponent<destroyArrowScript>().type = arrowType;
                         arrowSolo.GetComponent<destroyArrowScript>().explosion = explosion;
                         arrowSolo.GetComponent<Rigidbody2D>().velocity = dir1 * arrowSpeed;
-                        Vector2 dir2 = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y + h * 0.02f, Input.mousePosition.z)) - transform.position;
-                        var angle2 = Mathf.Atan2(dir2.y, dir2.x) * Mathf.Rad2Deg;
+                        var angle2 = angle + 0.75f;
+                        Vector2 dir2 = new Vector2(99999.0f * Mathf.Cos(angle2 * Mathf.Deg2Rad) + transform.position.x, 99999.0f * Mathf.Sin(angle2 * Mathf.Deg2Rad) + transform.position.y);
                         var rot2 = Quaternion.AngleAxis(angle2, Vector3.forward);
                         if (arrowType == 1) arrowDuo = Instantiate(arrow1, transform.position, rot2);
                         else if (arrowType == 2) arrowDuo = Instantiate(arrow2, transform.position, rot2);
@@ -370,8 +378,10 @@ public class bowScript : MonoBehaviour
                     }
                     if (arrowNumber == 3)
                     {
-                        Vector2 dir1 = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y - h * 0.02f, Input.mousePosition.z)) - transform.position;
-                        var angle1 = Mathf.Atan2(dir1.y, dir1.x) * Mathf.Rad2Deg;
+                        Vector2 dir3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                        var angle3 = Mathf.Atan2(dir3.y, dir3.x) * Mathf.Rad2Deg;
+                        var angle1 = angle3 - 0.75f;
+                        Vector2 dir1 = new Vector2(99999.0f * Mathf.Cos(angle1 * Mathf.Deg2Rad) + transform.position.x, 99999.0f * Mathf.Sin(angle1 * Mathf.Deg2Rad) + transform.position.y);
                         var rot1 = Quaternion.AngleAxis(angle1, Vector3.forward);
                         if (arrowType == 1) arrowSolo = Instantiate(arrow1, transform.position, rot1);
                         else if (arrowType == 2) arrowSolo = Instantiate(arrow2, transform.position, rot1);
@@ -388,8 +398,8 @@ public class bowScript : MonoBehaviour
                         arrowSolo.GetComponent<destroyArrowScript>().type = arrowType;
                         arrowSolo.GetComponent<destroyArrowScript>().explosion = explosion;
                         arrowSolo.GetComponent<Rigidbody2D>().velocity = dir1 * arrowSpeed;
-                        Vector2 dir2 = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y + h * 0.02f, Input.mousePosition.z)) - transform.position;
-                        var angle2 = Mathf.Atan2(dir2.y, dir2.x) * Mathf.Rad2Deg;
+                        var angle2 = angle3 + 0.75f;
+                        Vector2 dir2 = new Vector2(99999.0f * Mathf.Cos(angle2 * Mathf.Deg2Rad) + transform.position.x, 99999.0f * Mathf.Sin(angle2 * Mathf.Deg2Rad) + transform.position.y);
                         var rot2 = Quaternion.AngleAxis(angle2, Vector3.forward);
                         if (arrowType == 1) arrowDuo = Instantiate(arrow1, transform.position, rot2);
                         else if (arrowType == 2) arrowDuo = Instantiate(arrow2, transform.position, rot2);
@@ -406,8 +416,6 @@ public class bowScript : MonoBehaviour
                         arrowDuo.GetComponent<destroyArrowScript>().type = arrowType;
                         arrowDuo.GetComponent<destroyArrowScript>().explosion = explosion;
                         arrowDuo.GetComponent<Rigidbody2D>().velocity = dir2 * arrowSpeed;
-                        Vector2 dir3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-                        var angle3 = Mathf.Atan2(dir3.y, dir3.x) * Mathf.Rad2Deg;
                         var rot3 = Quaternion.AngleAxis(angle3, Vector3.forward);
                         if (arrowType == 1) arrowTrio = Instantiate(arrow1, transform.position, rot3);
                         else if (arrowType == 2) arrowTrio = Instantiate(arrow2, transform.position, rot3);
