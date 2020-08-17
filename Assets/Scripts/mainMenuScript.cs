@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class mainMenuScript : MonoBehaviour
 {
@@ -129,6 +130,20 @@ public class mainMenuScript : MonoBehaviour
 
     private Text languageChooseText;
     private Text firstLanguageButtonText;
+    
+    //The audio mixer
+    public AudioMixer mixer;
+
+    //The effects audio source
+    private AudioSource effectsSource;
+    //The audio clips
+    public AudioClip confirm;
+    public AudioClip select;
+
+    //The volume sliders
+    private Slider masterSlider;
+    private Slider musicSlider;
+    private Slider effectsSlider;
 
     void Awake()
     {
@@ -294,6 +309,9 @@ public class mainMenuScript : MonoBehaviour
         if (!PlayerPrefs.HasKey("Language")) PlayerPrefs.SetInt("Language", 0); //0-> english, 1-> spanish, 2-> basque
         if (!PlayerPrefs.HasKey("languageChoosen")) PlayerPrefs.SetInt("languageChoosen", 0);
         if (!PlayerPrefs.HasKey("highscoreUnlocked")) PlayerPrefs.SetInt("highscoreUnlocked", 0);
+        if (!PlayerPrefs.HasKey("masterVolume")) PlayerPrefs.SetFloat("masterVolume", 1.0f);
+        if (!PlayerPrefs.HasKey("musicVolume")) PlayerPrefs.SetFloat("musicVolume", 1.0f);
+        if (!PlayerPrefs.HasKey("effectsVolume")) PlayerPrefs.SetFloat("effectsVolume", 1.0f);
 
 
         //We find all the gameobjects
@@ -331,8 +349,22 @@ public class mainMenuScript : MonoBehaviour
         actualDamage.GetComponent<Text>().text = PlayerPrefs.GetFloat("UpgradeMultiplier").ToString();
         coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
         buyDamagePriceNumb = GameObject.Find("BuyDamagePriceNumb").GetComponent<Text>();
-        //We deactivate some gameobjects
+        //We find the sliders
+        masterSlider = GameObject.Find("MasterSlider").GetComponent<Slider>();
+        musicSlider = GameObject.Find("MusicSlider").GetComponent<Slider>();
+        effectsSlider = GameObject.Find("EffectsSlider").GetComponent<Slider>();
+        //We find the effects audio source
+        effectsSource = GameObject.Find("EffectsSource").GetComponent<AudioSource>();
+        
 
+        //We put the value to the mixer
+        //mixer.SetFloat("Master", Mathf.Log10(PlayerPrefs.GetFloat("masterVolume")) * 20);
+        //mixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("musicVolume")) * 20);
+        //mixer.SetFloat("Effects", Mathf.Log10(PlayerPrefs.GetFloat("effectsVolume")) * 20);
+
+
+
+        //We deactivate some gameobjects
         if (PlayerPrefs.GetInt("highscoreUnlocked") == 0) highscoreButton.SetActive(false);
         else buyHighscoreButton.interactable = false;
         storeMenu.SetActive(false);
@@ -343,6 +375,12 @@ public class mainMenuScript : MonoBehaviour
         specialArrowsStoreMenu.SetActive(false);
         bowStoreMenu.SetActive(false);
         specialStoreMenu.SetActive(false);
+        //We put the value to the volume sliders
+        masterSlider.GetComponent<AudioSource>().mute = true;
+        effectsSlider.GetComponent<AudioSource>().mute = true;
+        masterSlider.value = PlayerPrefs.GetFloat("masterVolume");
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        effectsSlider.value = PlayerPrefs.GetFloat("effectsVolume");
         //We get the number of bombs and instant kill arrows and write them with different colors depending on the amount of them we have
         bombNumb.GetComponent<Text>().text = PlayerPrefs.GetInt("Bombs").ToString();
         if (PlayerPrefs.GetInt("Bombs") == 10) bombNumb.GetComponent<Text>().color = Color.green;
@@ -405,9 +443,11 @@ public class mainMenuScript : MonoBehaviour
         }
         else LanguageSelectionMenu.SetActive(false);
 
+
         //We save the translations
         if (PlayerPrefs.GetInt("Language") == 0)
         {
+            LanguageDropdown.value = 0;
             playButtonText.text = "Play";
             storeButtonText.text = "Store";
             configurationButtonText.text = "Configuration";
@@ -479,6 +519,7 @@ public class mainMenuScript : MonoBehaviour
         }
         else if (PlayerPrefs.GetInt("Language") == 1)
         {
+            LanguageDropdown.value = 1;
             playButtonText.text = "Jugar";
             storeButtonText.text = "Tienda";
             configurationButtonText.text = "Configuración";
@@ -550,6 +591,7 @@ public class mainMenuScript : MonoBehaviour
         }
         else if (PlayerPrefs.GetInt("Language") == 2)
         {
+            LanguageDropdown.value = 2;
             playButtonText.text = "Jolastu";
             storeButtonText.text = "Denda";
             configurationButtonText.text = "Konfigurazioa";
@@ -620,10 +662,21 @@ public class mainMenuScript : MonoBehaviour
             firstLanguageButtonText.text = "Gorde";
         }
     }
+    void Start()
+    {
+        mixer.SetFloat("Master", Mathf.Log10(PlayerPrefs.GetFloat("masterVolume")) * 20);
+        mixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("musicVolume")) * 20);
+        mixer.SetFloat("Effects", Mathf.Log10(PlayerPrefs.GetFloat("effectsVolume")) * 20);
+    }
 
     //Function to change the language
     public void ChangeLanguage(bool first)
     {
+        if (configurationMenu.activeSelf)
+        {
+            effectsSource.clip = select;
+            effectsSource.Play();
+        }
         if (first) PlayerPrefs.SetInt("Language", LanguageChooseDropdown.value);
         else PlayerPrefs.SetInt("Language", LanguageDropdown.value);
         if (PlayerPrefs.GetInt("Language") == 0)
@@ -845,6 +898,8 @@ public class mainMenuScript : MonoBehaviour
     public void CloseChooseLanguage()
     {
         LanguageSelectionMenu.SetActive(false);
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Language") == 0) LanguageDropdown.value = 0;
         else if (PlayerPrefs.GetInt("Language") == 1) LanguageDropdown.value = 1;
         else if (PlayerPrefs.GetInt("Language") == 2) LanguageDropdown.value = 2;
@@ -853,12 +908,16 @@ public class mainMenuScript : MonoBehaviour
     //Function to start a game
     public void StartGame()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         SceneManager.LoadScene(1);
     }
 
     //Function to open the store
     public void OpenStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         mainMenu.SetActive(false);
         storeMenu.SetActive(true);
     }
@@ -866,6 +925,8 @@ public class mainMenuScript : MonoBehaviour
     //function to close the store
     public void CloseStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         mainMenu.SetActive(true);
         storeMenu.SetActive(false);
     }
@@ -873,6 +934,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to open the arrow store
     public void OpenArrowStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         storeMenu.SetActive(false);
         arrowsStoreMenu.SetActive(true);
     }
@@ -880,6 +943,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to close the arrow store
     public void CloseArrowStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         storeMenu.SetActive(true);
         arrowsStoreMenu.SetActive(false);
     }
@@ -887,6 +952,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to open the regular arrow store
     public void OpenRegularArrowStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         arrowsStoreMenu.SetActive(false);
         regularArrowsStoreMenu.SetActive(true);
     }
@@ -894,6 +961,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to close the regular arrow store
     public void CloseRegularArrowStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         arrowsStoreMenu.SetActive(true);
         regularArrowsStoreMenu.SetActive(false);
     }
@@ -901,6 +970,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to open the special arrow store
     public void OpenSpecialArrowStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         arrowsStoreMenu.SetActive(false);
         specialArrowsStoreMenu.SetActive(true);
     }
@@ -908,6 +979,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to close the special arrow store
     public void CloseSpcialArrowStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         arrowsStoreMenu.SetActive(true);
         specialArrowsStoreMenu.SetActive(false);
     }
@@ -915,6 +988,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to open the bow store from the store
     public void OpenBowStoreFromStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         storeMenu.SetActive(false);
         bowStoreMenu.SetActive(true);
         fromMenu = false;
@@ -923,6 +998,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to open the bow store from the menu
     public void OpenBowStoreFromMenu()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         mainMenu.SetActive(false);
         bowStoreMenu.SetActive(true);
         fromMenu = true;
@@ -931,6 +1008,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to close the bow store
     public void CloseBowStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         bowStoreMenu.SetActive(false);
         if (fromMenu) mainMenu.SetActive(true);
         else storeMenu.SetActive(true);
@@ -939,6 +1018,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to open the special store
     public void OpenSpecialStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         storeMenu.SetActive(false);
         specialStoreMenu.SetActive(true);
     }
@@ -946,6 +1027,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to close the special store
     public void CloseSpecialStore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         storeMenu.SetActive(true);
         specialStoreMenu.SetActive(false);
     }
@@ -953,6 +1036,10 @@ public class mainMenuScript : MonoBehaviour
     //Function to open the configuration
     public void OpenConfiguration()
     {
+        masterSlider.GetComponent<AudioSource>().mute = false;
+        effectsSlider.GetComponent<AudioSource>().mute = false;
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         mainMenu.SetActive(false);
         configurationMenu.SetActive(true);
     }
@@ -960,6 +1047,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to close the configuration
     public void CloseConfiguration()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         mainMenu.SetActive(true);
         configurationMenu.SetActive(false);
     }
@@ -967,6 +1056,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to open the highscore
     public void OpenHighscore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         mainMenu.SetActive(false);
         highscoreMenu.SetActive(true);
     }
@@ -974,6 +1065,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to close the highscore
     public void CloseHighscore()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         mainMenu.SetActive(true);
         highscoreMenu.SetActive(false);
     }
@@ -981,6 +1074,8 @@ public class mainMenuScript : MonoBehaviour
     //Functions to unlock the arrows
     public void UnlockArrow2()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow2") == 0)
@@ -994,6 +1089,8 @@ public class mainMenuScript : MonoBehaviour
     }
     public void UnlockArrow4()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow4") == 0)
@@ -1007,6 +1104,8 @@ public class mainMenuScript : MonoBehaviour
     }
     public void UnlockArrow5()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow5") == 0)
@@ -1020,6 +1119,8 @@ public class mainMenuScript : MonoBehaviour
     }
     public void UnlockArrow7()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow7") == 0)
@@ -1033,6 +1134,8 @@ public class mainMenuScript : MonoBehaviour
     }
     public void UnlockArrow8()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow8") == 0)
@@ -1046,6 +1149,8 @@ public class mainMenuScript : MonoBehaviour
     }
     public void UnlockArrow9()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 200)
         {
             if (PlayerPrefs.GetInt("Arrow9") == 0)
@@ -1059,6 +1164,8 @@ public class mainMenuScript : MonoBehaviour
     }
     public void UnlockArrow10()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 1000)
         {
             if (PlayerPrefs.GetInt("Arrow10") == 0)
@@ -1074,6 +1181,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to unlock the highscores
     public void UnlockHighScores()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 2000)
         {
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 2000);
@@ -1086,6 +1195,8 @@ public class mainMenuScript : MonoBehaviour
 
     //Function to upgrade the damage
     public void UpgradeDamage(){
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 5000 + PlayerPrefs.GetFloat("UpgradeMultiplier") * 30000)
         {
             PlayerPrefs.SetFloat("UpgradeMultiplier", PlayerPrefs.GetFloat("UpgradeMultiplier") + 0.1f);
@@ -1099,6 +1210,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to buy instant kill arrows
     public void IncrementInstantKill()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 100)
         {
             if (PlayerPrefs.GetInt("InstantKills") < 5)
@@ -1115,6 +1228,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to buy bombs
     public void IncrementBomb()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 100)
         {
             if (PlayerPrefs.GetInt("Bombs") < 10)
@@ -1131,6 +1246,8 @@ public class mainMenuScript : MonoBehaviour
     //Functions to unlock bows
     public void UnlockBow1()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         PlayerPrefs.SetInt("UsingBow", 1);
         bow1Bought.GetComponent<Image>().color = Color.yellow;
         bow2Bought.GetComponent<Image>().color = Color.white;
@@ -1141,6 +1258,8 @@ public class mainMenuScript : MonoBehaviour
     }
     public void UnlockBow2()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Bow2") == 0)           
         {
             if (PlayerPrefs.GetInt("Coins") >= 500)
@@ -1173,6 +1292,8 @@ public class mainMenuScript : MonoBehaviour
 
     public void UnlockBow3()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Bow3") == 0)
         {
             if (PlayerPrefs.GetInt("Coins") >= 1000)
@@ -1204,6 +1325,8 @@ public class mainMenuScript : MonoBehaviour
 
     public void UnlockBow4()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Bow4") == 0)
         {
             if (PlayerPrefs.GetInt("Coins") >= 1500)
@@ -1235,6 +1358,8 @@ public class mainMenuScript : MonoBehaviour
 
     public void UnlockBow5()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Bow5") == 0)
         {
             if (PlayerPrefs.GetInt("Coins") >= 2000)
@@ -1266,6 +1391,8 @@ public class mainMenuScript : MonoBehaviour
 
     public void UnlockBow6()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         if (PlayerPrefs.GetInt("Bow6") == 0)
         {
             if (PlayerPrefs.GetInt("Coins") >= 3000)
@@ -1298,6 +1425,8 @@ public class mainMenuScript : MonoBehaviour
     //Function to close the game
     public void QuitGame()
     {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         Debug.Log("Quitting game...");
         Application.Quit();
     }

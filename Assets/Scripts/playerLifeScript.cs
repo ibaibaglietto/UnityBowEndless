@@ -49,6 +49,7 @@ public class playerLifeScript : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<mobScript>().type != 0)
             {
+                gameObject.GetComponent<AudioSource>().Play();
                 health -= 1.0f;
                 healthBar.GetComponent<Image>().fillAmount = health / maxHealth;
                 Destroy(collision.gameObject);

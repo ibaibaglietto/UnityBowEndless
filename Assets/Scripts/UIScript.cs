@@ -62,6 +62,12 @@ public class UIScript : MonoBehaviour
     private Text top10Text;
     private Text top10InputFieldPlaceholder;
     private Text top10ButtonText;
+    //The effects audio source
+    private AudioSource effectsSource;
+    //The audio clips
+    public AudioClip confirm;
+    public AudioClip select;
+    public AudioClip selectArrow;
 
     private void Awake()
     {
@@ -107,6 +113,8 @@ public class UIScript : MonoBehaviour
         endelessController = GameObject.Find("EndlessController");
         top10 = GameObject.Find("Top10Menu");
         playerName = GameObject.Find("Top10InputFieldText");
+        //We find the effects audio source
+        effectsSource = GameObject.Find("EffectsSource").GetComponent<AudioSource>();
         //We deactivate all the carcaj interface
         arrow1.SetActive(false);
         arrow2.SetActive(false);
@@ -203,6 +211,9 @@ public class UIScript : MonoBehaviour
     //Function to resume the game
     public void Resume()
     {
+        effectsSource.volume = 1.0f;
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         bow.GetComponent<bowScript>().paused = false;
@@ -211,6 +222,9 @@ public class UIScript : MonoBehaviour
     //Function to pause the game
     void Pause()
     {
+        effectsSource.volume = 1.0f;
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         pauseMenu.SetActive(true);
         bow.GetComponent<bowScript>().paused = true;
         Time.timeScale = 0f;
@@ -220,6 +234,9 @@ public class UIScript : MonoBehaviour
     //Function to retry 
     public void Retry()
     {
+        effectsSource.volume = 1.0f;
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         Time.timeScale = 1f;
         Paused = false;
         SceneManager.LoadScene(1);
@@ -228,6 +245,9 @@ public class UIScript : MonoBehaviour
     //Function to open the menu
     public void Menu()
     {
+        effectsSource.volume = 1.0f;
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         Time.timeScale = 1f;
         Paused = false;
         SceneManager.LoadScene(0);
@@ -268,6 +288,9 @@ public class UIScript : MonoBehaviour
         }
         else
         {
+            effectsSource.volume = 0.2f;
+            effectsSource.clip = selectArrow;
+            effectsSource.Play();
             arrow1.SetActive(false);
             arrow2.SetActive(false);
             arrow3.SetActive(false);
@@ -305,6 +328,9 @@ public class UIScript : MonoBehaviour
     //Function to update the highscores
     public void UpdateHighscore()
     {
+        effectsSource.volume = 1.0f;
+        effectsSource.clip = confirm;
+        effectsSource.Play();
         highScoreScript highScoreTableScript = new highScoreScript();
         highScoreTableScript.AddHighScoreEntry(((int)(Time.fixedTime - endelessController.GetComponent<endlessControllerScript>().startTime)), playerName.GetComponent<Text>().text);
         top10.SetActive(false);

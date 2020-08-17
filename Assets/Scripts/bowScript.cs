@@ -303,6 +303,7 @@ public class bowScript : MonoBehaviour
                         }
                         
                     }
+                    gameObject.GetComponent<AudioSource>().Play();
                     //We save the time the last arrow was shot
                     lastArrow = Time.fixedTime;
                 }
@@ -459,6 +460,7 @@ public class bowScript : MonoBehaviour
                         else if (arrowType == 6) canvas.GetComponent<UIScript>().instantNumb -= 1;
                     }
                 }
+                gameObject.GetComponent<AudioSource>().Play();
                 lastArrow = Time.fixedTime;
 
             }
