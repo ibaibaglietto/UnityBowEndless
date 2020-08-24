@@ -15,6 +15,8 @@ public class mainMenuScript : MonoBehaviour
     private GameObject storeMenu;
     //The configuration menu
     private GameObject configurationMenu;
+    //The credits menu
+    private GameObject creditsMenu;
     //The highscore menu
     private GameObject highscoreMenu;
     //The coins
@@ -120,7 +122,11 @@ public class mainMenuScript : MonoBehaviour
     private Text masterText;
     private Text musicText;
     private Text effectsText;
+    private Text creditsButton;
     private Text configurationMenuReturnButtonText;
+
+    private Text creditsMenuTitle;
+    private Text creditsMenuReturnButtonText;
 
     private Text highscoreTitleText;
     private Text positionTitle;
@@ -206,7 +212,11 @@ public class mainMenuScript : MonoBehaviour
         masterText = GameObject.Find("MasterText").GetComponent<Text>();
         musicText = GameObject.Find("MusicText").GetComponent<Text>();
         effectsText = GameObject.Find("EffectsText").GetComponent<Text>();
+        creditsButton = GameObject.Find("CreditsButtonText").GetComponent<Text>();
         configurationMenuReturnButtonText = GameObject.Find("ConfigurationMenuReturnButtonText").GetComponent<Text>();
+
+        creditsMenuTitle = GameObject.Find("CreditsMenuTitle").GetComponent<Text>();
+        creditsMenuReturnButtonText = GameObject.Find("CreditsMenuReturnButtonText").GetComponent<Text>();
 
         highscoreTitleText = GameObject.Find("HighscoreTitleText").GetComponent<Text>();
         positionTitle = GameObject.Find("PositionTitle").GetComponent<Text>();
@@ -323,6 +333,7 @@ public class mainMenuScript : MonoBehaviour
         mainMenu = GameObject.Find("MainMenu");
         storeMenu = GameObject.Find("StoreMenu");
         configurationMenu = GameObject.Find("ConfigurationMenu");
+        creditsMenu = GameObject.Find("CreditsMenu");
         highscoreMenu = GameObject.Find("HighscoreMenu");
         coins = GameObject.Find("Coins");
         arrowsStoreMenu = GameObject.Find("ArrowStoreMenu");
@@ -369,6 +380,7 @@ public class mainMenuScript : MonoBehaviour
         else buyHighscoreButton.interactable = false;
         storeMenu.SetActive(false);
         configurationMenu.SetActive(false);
+        creditsMenu.SetActive(false);
         highscoreMenu.SetActive(false);
         arrowsStoreMenu.SetActive(false);
         regularArrowsStoreMenu.SetActive(false);
@@ -506,7 +518,11 @@ public class mainMenuScript : MonoBehaviour
             masterText.text = "Main volume:";
             musicText.text = "Music:";
             effectsText.text = "Effects:";
+            creditsButton.text = "Credits";
             configurationMenuReturnButtonText.text = "Return";
+
+            creditsMenuTitle.text = "Credits";
+            creditsMenuReturnButtonText.text = "Return";
 
             highscoreTitleText.text = "High scores";
             positionTitle.text = "POSITION";
@@ -578,7 +594,11 @@ public class mainMenuScript : MonoBehaviour
             masterText.text = "Volumen maestro:";
             musicText.text = "Música:";
             effectsText.text = "Efectos:";
+            creditsButton.text = "Créditos";
             configurationMenuReturnButtonText.text = "Volver";
+
+            creditsMenuTitle.text = "Créditos";
+            creditsMenuReturnButtonText.text = "Volver";
 
             highscoreTitleText.text = "Tabla de puntuaciones";
             positionTitle.text = "POSICIÓN";
@@ -650,7 +670,11 @@ public class mainMenuScript : MonoBehaviour
             masterText.text = "Bolumen nagusia:";
             musicText.text = "Musika:";
             effectsText.text = "Efektuak:";
+            creditsButton.text = "Kredituak";
             configurationMenuReturnButtonText.text = "Itzuli";
+
+            creditsMenuTitle.text = "Kredituak";
+            creditsMenuReturnButtonText.text = "itzuli";
 
             highscoreTitleText.text = "Puntuazio taula";
             positionTitle.text = "POSIZIOA";
@@ -681,6 +705,7 @@ public class mainMenuScript : MonoBehaviour
         else PlayerPrefs.SetInt("Language", LanguageDropdown.value);
         if (PlayerPrefs.GetInt("Language") == 0)
         {
+            LanguageDropdown.value = 0;
             playButtonText.text = "Play";
             storeButtonText.text = "Store";
             configurationButtonText.text = "Configuration";
@@ -739,7 +764,11 @@ public class mainMenuScript : MonoBehaviour
             masterText.text = "Main volume:";
             musicText.text = "Music:";
             effectsText.text = "Effects:";
+            creditsButton.text = "Credits";
             configurationMenuReturnButtonText.text = "Return";
+
+            creditsMenuTitle.text = "Credits";
+            creditsMenuReturnButtonText.text = "Return";
 
             highscoreTitleText.text = "High scores";
             positionTitle.text = "POSITION";
@@ -752,6 +781,7 @@ public class mainMenuScript : MonoBehaviour
         }
         else if (PlayerPrefs.GetInt("Language") == 1)
         {
+            LanguageDropdown.value = 1;
             playButtonText.text = "Jugar";
             storeButtonText.text = "Tienda";
             configurationButtonText.text = "Configuración";
@@ -810,7 +840,11 @@ public class mainMenuScript : MonoBehaviour
             masterText.text = "Volumen maestro:";
             musicText.text = "Música:";
             effectsText.text = "Efectos:";
+            creditsButton.text = "Créditos";
             configurationMenuReturnButtonText.text = "Volver";
+
+            creditsMenuTitle.text = "Créditos";
+            creditsMenuReturnButtonText.text = "Volver";
 
             highscoreTitleText.text = "Tabla de puntuaciones";
             positionTitle.text = "POSICIÓN";
@@ -823,6 +857,7 @@ public class mainMenuScript : MonoBehaviour
         }
         else if (PlayerPrefs.GetInt("Language") == 2)
         {
+            LanguageDropdown.value = 2;
             playButtonText.text = "Jolastu";
             storeButtonText.text = "Denda";
             configurationButtonText.text = "Konfigurazioa";
@@ -881,7 +916,11 @@ public class mainMenuScript : MonoBehaviour
             masterText.text = "Bolumen nagusia:";
             musicText.text = "Musika:";
             effectsText.text = "Efektuak:";
+            creditsButton.text = "Kredituak";
             configurationMenuReturnButtonText.text = "Itzuli";
+
+            creditsMenuTitle.text = "Kredituak";
+            creditsMenuReturnButtonText.text = "itzuli";
 
             highscoreTitleText.text = "Puntuazio taula";
             positionTitle.text = "POSIZIOA";
@@ -1051,6 +1090,24 @@ public class mainMenuScript : MonoBehaviour
         effectsSource.Play();
         mainMenu.SetActive(true);
         configurationMenu.SetActive(false);
+    }
+
+    //Function to open the credits
+    public void OpenCredits()
+    {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
+        configurationMenu.SetActive(false);
+        creditsMenu.SetActive(true);
+    }
+
+    //Function to close the credits
+    public void CloseCredits()
+    {
+        effectsSource.clip = confirm;
+        effectsSource.Play();
+        configurationMenu.SetActive(true);
+        creditsMenu.SetActive(false);
     }
 
     //Function to open the highscore

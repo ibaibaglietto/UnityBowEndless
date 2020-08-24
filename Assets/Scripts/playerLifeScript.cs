@@ -23,6 +23,10 @@ public class playerLifeScript : MonoBehaviour
     public GameObject top10;
     //The score
     private GameObject score;
+    //The end music
+    public AudioClip endMusic;
+    //The music source
+    private AudioSource musicSource;
 
     private void Start()
     {
@@ -33,6 +37,7 @@ public class playerLifeScript : MonoBehaviour
         bow = GameObject.Find("bow");
         endelessController = GameObject.Find("EndlessController");
         top10 = GameObject.Find("Top10Menu");
+        musicSource = GameObject.Find("MusicSource").GetComponent<AudioSource>();
         endMenu.SetActive(false);
         score = GameObject.Find("Score");
         //We set the max health and the health
@@ -57,6 +62,8 @@ public class playerLifeScript : MonoBehaviour
                 //We save all the coins, score and number of bombs and instant kill arrows.
                 if (health <= 0.0f)
                 {
+                    musicSource.clip = endMusic;
+                    musicSource.Play();
                     bow.GetComponent<bowScript>().dead = true;
                     Time.timeScale = 0f;
                     endMenu.SetActive(true);
