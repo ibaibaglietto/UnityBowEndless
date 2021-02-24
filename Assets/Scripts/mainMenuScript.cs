@@ -230,6 +230,7 @@ public class mainMenuScript : MonoBehaviour
 
         highScoreScript highScoreTableScript = new highScoreScript();
 
+
         //We initialize the playerprefs
         if (!PlayerPrefs.HasKey("highscoreTable"))
         {
@@ -250,7 +251,7 @@ public class mainMenuScript : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey("Coins"))
         {
-            PlayerPrefs.SetInt("Coins", 99999);
+            PlayerPrefs.SetInt("Coins", 0);
         }
         if (!PlayerPrefs.HasKey("Bombs"))
         {
@@ -487,7 +488,7 @@ public class mainMenuScript : MonoBehaviour
             brownArrowsText.text = "Brown \narrows";
             returnRegularArrowButtonText.text = "Return";
 
-            specialArrowsTitle.text = "Especial arrows";
+            specialArrowsTitle.text = "Special arrows";
             buySpecialArrowsExplanationText.text = "Welcome to the special arrow store. Here you can buy three types of arrow: bomb arrows (100 coins), instant kill arrows (100 coins) and angelic arrows (1000 coins). The first two are limited and you will need to buy them each time you use one, you can have 10 bomb arrows and 5 instant kill arrows. Speaking about angelic arrows, you will only need to buy them once.";
             bombArrowsText.text = "Bomb \narrows";
             instantKillArrowsText.text = "Instant kill arrows";
@@ -495,7 +496,7 @@ public class mainMenuScript : MonoBehaviour
             returnSpecialArrowStoreText.text = "Return";
 
             bowStoreTitle.text = "Bows";
-            bowStoreExplanationText.text = "Welcome to the arrow store. You can buy and equip bows here.";
+            bowStoreExplanationText.text = "Welcome to the bow store. You can buy and equip bows here.";
             bow1Text.text = "Games worst bow, but it’s free.";
             bow2Text.text = "Upgrades a bit the shooting speed and the damage. Price: 500";
             bow3Text.text = "It’s exactly the same as the previous one, but it shoots two arrows. Price: 1000";
@@ -733,7 +734,7 @@ public class mainMenuScript : MonoBehaviour
             brownArrowsText.text = "Brown \narrows";
             returnRegularArrowButtonText.text = "Return";
 
-            specialArrowsTitle.text = "Especial arrows";
+            specialArrowsTitle.text = "Special arrows";
             buySpecialArrowsExplanationText.text = "Welcome to the special arrow store. Here you can buy three types of arrow: bomb arrows (100 coins), instant kill arrows (100 coins) and angelic arrows (1000 coins). The first two are limited and you will need to buy them each time you use one, you can have 10 bomb arrows and 5 instant kill arrows. Speaking about angelic arrows, you will only need to buy them once.";
             bombArrowsText.text = "Bomb \narrows";
             instantKillArrowsText.text = "Instant kill arrows";
@@ -1256,9 +1257,9 @@ public class mainMenuScript : MonoBehaviour
         effectsSource.Play();
         if (PlayerPrefs.GetInt("Coins") >= 5000 + PlayerPrefs.GetFloat("UpgradeMultiplier") * 30000)
         {
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - (int)(5000 + PlayerPrefs.GetFloat("UpgradeMultiplier") * 30000));
             PlayerPrefs.SetFloat("UpgradeMultiplier", PlayerPrefs.GetFloat("UpgradeMultiplier") + 0.1f);
             actualDamage.GetComponent<Text>().text = PlayerPrefs.GetFloat("UpgradeMultiplier").ToString();
-            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - (int)(5000 + PlayerPrefs.GetFloat("UpgradeMultiplier") * 30000));
             coins.GetComponent<Text>().text = PlayerPrefs.GetInt("Coins").ToString();
             buyDamagePriceNumb.text = (5000 + PlayerPrefs.GetFloat("UpgradeMultiplier") * 30000).ToString();
             Debug.Log(PlayerPrefs.GetFloat("UpgradeMultiplier"));
